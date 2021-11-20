@@ -1,0 +1,115 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<MvcMovie.Models.Film>
+
+    <div class="row">
+        <div class="col">
+            <h1>Les plus loués</h1>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NomFilm)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DateSortieFilm)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NbLocationsFilm)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DisponibiliteFilm)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategorieFilm)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CategorieFilm)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            TEST
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div class="col">
+            <h1>Location en cours</h1>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NomFilm)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DateSortieFilm)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NbLocationsFilm)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DisponibiliteFilm)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategorieFilm)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+
+
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CategorieFilm)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+
+                }
+                else
+                {
+                    <tr>
+                        <td>
+                            TEST
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+    </div>
