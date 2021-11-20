@@ -15,7 +15,7 @@ namespace MvcMovie.Models
                     DbContextOptions<MvcMovieContext>>()))
             {
                 // Look for any movies.
-                if (context.Client.Any() || context.Film.Any() || context.Realisateur.Any() || context.Location.Any())
+                if (context.Client.Any() || context.Film.Any() || context.Location.Any())
                 {
                     return;   // DB has been seeded
                 }
@@ -38,20 +38,8 @@ namespace MvcMovie.Models
                         AdresseClient = "151548 Avignon",
                         MailClient = "popodu84@gmail.com"
                     }
-                );
 
-                context.Realisateur.AddRange(
-                  new Realisateur
-                  {
-                      PrenomRealisateur = "Coco",
-                      NomRealisateur = "ROY"
-                  },
-
-                  new Realisateur
-                  {
-                      PrenomRealisateur = "Popo",
-                      NomRealisateur = "TEO"
-                  }
+            
               );
 
 
@@ -59,7 +47,7 @@ namespace MvcMovie.Models
                   new Film
                   {
                       NomFilm = "Coco",
-                      RealisateurId = 0,
+                      RealisateurFilm = "test",
                       DateSortieFilm = DateTime.Now,
                       NbLocationsFilm = 15,
                       DisponibiliteFilm = true,
@@ -69,7 +57,7 @@ namespace MvcMovie.Models
                   new Film
                   {
                       NomFilm = "Blabla",
-                      RealisateurId = 1,
+                      RealisateurFilm = "test",
                       DateSortieFilm = DateTime.Now,
                       NbLocationsFilm = 2,
                       DisponibiliteFilm = true,

@@ -23,19 +23,7 @@ namespace MvcMovie.Migrations
                     table.PrimaryKey("PK_Client", x => x.Id);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Realisateur",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NomRealisateur = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PrenomRealisateur = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Realisateur", x => x.Id);
-                });
+          
 
             migrationBuilder.CreateTable(
                 name: "Film",
@@ -44,7 +32,7 @@ namespace MvcMovie.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     NomFilm = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RealisateurId = table.Column<int>(type: "int", nullable: false),
+                    RealisateurFilm = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DateSortieFilm = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NbLocationsFilm = table.Column<int>(type: "int", nullable: false),
                     DisponibiliteFilm = table.Column<bool>(type: "bit", nullable: false),
@@ -53,12 +41,7 @@ namespace MvcMovie.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Film", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Film_Realisateur_RealisateurId",
-                        column: x => x.RealisateurId,
-                        principalTable: "Realisateur",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                  
                 });
 
             migrationBuilder.CreateTable(
@@ -89,10 +72,7 @@ namespace MvcMovie.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Film_RealisateurId",
-                table: "Film",
-                column: "RealisateurId");
+         
 
             migrationBuilder.CreateIndex(
                 name: "IX_Location_ClientId",
@@ -116,8 +96,6 @@ namespace MvcMovie.Migrations
             migrationBuilder.DropTable(
                 name: "Film");
 
-            migrationBuilder.DropTable(
-                name: "Realisateur");
         }
     }
 }

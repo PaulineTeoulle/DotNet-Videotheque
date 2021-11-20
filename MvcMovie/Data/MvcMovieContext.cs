@@ -14,8 +14,6 @@ namespace MvcMovie.Data
         {
         }
 
-        public DbSet<MvcMovie.Models.Realisateur> Realisateur { get; set; }
-
         public DbSet<MvcMovie.Models.Film> Film { get; set; }
 
         public DbSet<MvcMovie.Models.Client> Client { get; set; }

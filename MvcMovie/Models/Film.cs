@@ -11,8 +11,7 @@ namespace MvcMovie.Models
         [Required(ErrorMessage = "Le titre du film est obligatoire.")]
         public string NomFilm { get; set; }
       
-        public virtual Realisateur FilmRealisateurId{ get; set; }
-        public int RealisateurId { get; set; }
+        public string RealisateurFilm { get; set; }
 
         [Display(Name = "Date de parution")]
         [DisplayFormat(HtmlEncode = false, DataFormatString = "{0:dd/MM/yyyy}")]

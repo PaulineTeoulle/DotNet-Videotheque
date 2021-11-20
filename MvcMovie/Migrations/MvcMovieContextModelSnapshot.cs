@@ -71,12 +71,13 @@ namespace MvcMovie.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RealisateurId")
-                        .HasColumnType("int");
+
+                    b.Property<string>("RealisateurFilm")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RealisateurId");
 
                     b.ToTable("Film");
                 });
@@ -109,26 +110,7 @@ namespace MvcMovie.Migrations
                     b.ToTable("Location");
                 });
 
-            modelBuilder.Entity("MvcMovie.Models.Realisateur", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("NomRealisateur")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrenomRealisateur")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Realisateur");
-                });
-
+          
             modelBuilder.Entity("MvcMovie.Models.Film", b =>
                 {
                     b.HasOne("MvcMovie.Models.Realisateur", "FilmRealisateurId")
