@@ -11,12 +11,16 @@ namespace MvcMovie.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Film")]
+        [Display(Name = "Nom du film")]
         public virtual Film LocationFilmId { get; set; }
+
+        [Display(Name = "Film")]
         public int FilmId { get; set; }
 
-        [Display(Name = "Client")]
+        [Display(Name = "Nom du client")]
         public virtual Client LocationClientId { get; set; }
+
+        [Display(Name = "Client")]
         public int ClientId { get; set; }
 
 

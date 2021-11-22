@@ -1,115 +1,90 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+
+    IEnumerable<Film> films = ViewData["Films"] as IEnumerable<Film>;
+    IEnumerable<Location> locations = ViewData["Locations"] as IEnumerable<Location>;
 }
-@model IEnumerable<MvcMovie.Models.Film>
 
-    <div class="row">
-        <div class="col">
-            <h1>Les plus loués</h1>
+<div class="row">
+    <div class="col">
+        <h1>Les plus loués</h1>
 
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NomFilm)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DateSortieFilm)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NbLocationsFilm)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DisponibiliteFilm)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CategorieFilm)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                      Nom du film
+                    </th>
+                    <th>
+                       Date sortie
+                    </th>
+                    <th>
+                      Nb Location
+                    </th>
+                    <th>
+                    Disponibilité
+                    </th>
+                    <th>Catégorie
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
 
 
-                @if (Model != null)
+           
+            
+                @foreach (Film film in films)
                 {
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CategorieFilm)
-                            </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            </td>
-                        </tr>
-                    }
+        <tr>
 
+            <td>
+                @film.NomFilm
+            <td>
+                @film.DateSortieFilm
+            </td>
+            <td>@film.NbLocationsFilm</td>
+
+            <td>@film.DisponibiliteFilm</td>
+            <td>@film.CategorieFilm</td>
+        </tr>
                 }
-                else
+
+        </table>
+    </div>
+
+    <div class="col">
+        <h1>Location en cours</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Date retour
+                    </th>
+                    <th>
+                        Titre film
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+
+
+
+            @foreach (Location loc in locations)
                 {
                     <tr>
+
                         <td>
-                            TEST
-                        </td>
-                    </tr>
-                }
-            </table>
-        </div>
-
-        <div class="col">
-            <h1>Location en cours</h1>
-
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NomFilm)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DateSortieFilm)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.NbLocationsFilm)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.DisponibiliteFilm)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.CategorieFilm)
-                        </th>
-                        <th></th>
-                    </tr>
-                </thead>
-
-
-                @if (Model != null)
-                {
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CategorieFilm)
-                            </td>
-                            <td>
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            </td>
-                        </tr>
-                    }
-
-                }
-                else
-                {
-                    <tr>
+                            @loc.DateRetourLocation
                         <td>
-                            TEST
+                            @loc.FilmId
                         </td>
+                        <td>  <a asp-action="Delete" asp-route-id="@loc.Id">Retourner</a> |</td>
                     </tr>
                 }
-            </table>
-        </div>
+
+        </table>
 
     </div>
+
+</div>

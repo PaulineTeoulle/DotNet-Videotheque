@@ -10,10 +10,12 @@ namespace MvcMovie.Models
         [Display(Name = "Titre")]
         [Required(ErrorMessage = "Le titre du film est obligatoire.")]
         public string NomFilm { get; set; }
-      
+
+        [Display(Name = "Réalisateur")]
+        [Required(ErrorMessage = "Le réalisateur du film est obligatoire.")]
         public string RealisateurFilm { get; set; }
 
-        [Display(Name = "Date de parution")]
+        [Display(Name = "Parution")]
         [DisplayFormat(HtmlEncode = false, DataFormatString = "{0:dd/MM/yyyy}")]
         [DataType(DataType.Date)]
         [Required(ErrorMessage = "L'année de sortie du film est requise.")]
@@ -32,6 +34,7 @@ namespace MvcMovie.Models
         {
             // quand le film est créé, il est de suite disponible à la location
             this.DisponibiliteFilm = true;
+            this.NbLocationsFilm = 0;
         }
     }
 }

@@ -111,16 +111,7 @@ namespace MvcMovie.Migrations
                 });
 
           
-            modelBuilder.Entity("MvcMovie.Models.Film", b =>
-                {
-                    b.HasOne("MvcMovie.Models.Realisateur", "FilmRealisateurId")
-                        .WithMany()
-                        .HasForeignKey("RealisateurId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("FilmRealisateurId");
-                });
+       
 
             modelBuilder.Entity("MvcMovie.Models.Location", b =>
                 {

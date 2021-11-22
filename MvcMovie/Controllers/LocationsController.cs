@@ -49,8 +49,8 @@ namespace MvcMovie.Controllers
         // GET: Locations/Create
         public IActionResult Create()
         {
-            ViewData["ClientId"] = new SelectList(_context.Client, "Id", "AdresseClient");
-            ViewData["FilmId"] = new SelectList(_context.Film, "Id", "CategorieFilm");
+            ViewData["ClientId"] = new SelectList(_context.Client, "Id", "NomClient");
+            ViewData["FilmId"] = new SelectList(_context.Film, "Id", "NomFilm");
             return View();
         }
 
@@ -64,12 +64,39 @@ namespace MvcMovie.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(location);
+                //TODO : Modifier de +1 le nombre de location du client
+             /*   Film film = (from f in _context.Film where f.Id == location.Id select f).First();
+                if (film == null)
+                {
+                    return NotFound();
+                }
+                film.NbLocationsFilm++;
+                film.DisponibiliteFilm = false;
+
+
+                var film
+                 = await _context.Film 
+                 .Include(f => f.Id)
+               .Include(f => f.LocationFilmId)
+               .FirstOrDefaultAsync(m => m.Id == id);*/
+
+
+
+
+
+
+
+
+
+
+                //_context.Location.Add(location);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientId"] = new SelectList(_context.Client, "Id", "AdresseClient", location.ClientId);
-            ViewData["FilmId"] = new SelectList(_context.Film, "Id", "CategorieFilm", location.FilmId);
+            ViewData["ClientId"] = new SelectList(_context.Client, "Id", "NomClient", location.ClientId);
+            ViewData["FilmId"] = new SelectList(_context.Film, "Id", "NomFilm", location.FilmId);
             return View(location);
+
         }
 
         // GET: Locations/Edit/5
@@ -85,8 +112,8 @@ namespace MvcMovie.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClientId"] = new SelectList(_context.Client, "Id", "AdresseClient", location.ClientId);
-            ViewData["FilmId"] = new SelectList(_context.Film, "Id", "CategorieFilm", location.FilmId);
+            ViewData["ClientId"] = new SelectList(_context.Client, "Id", "NomClient", location.ClientId);
+            ViewData["FilmId"] = new SelectList(_context.Film, "Id", "NomFilm", location.FilmId);
             return View(location);
         }
 
@@ -122,8 +149,8 @@ namespace MvcMovie.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientId"] = new SelectList(_context.Client, "Id", "AdresseClient", location.ClientId);
-            ViewData["FilmId"] = new SelectList(_context.Film, "Id", "CategorieFilm", location.FilmId);
+            ViewData["ClientId"] = new SelectList(_context.Client, "Id", "NomClient", location.ClientId);
+            ViewData["FilmId"] = new SelectList(_context.Film, "Id", "NomFilm", location.FilmId);
             return View(location);
         }
 
