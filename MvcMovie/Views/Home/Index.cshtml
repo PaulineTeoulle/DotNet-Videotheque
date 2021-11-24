@@ -56,11 +56,16 @@
                 </tr>
             </thead>
 
-            @if (locations == null)
+            @if (locations != null)
             {
                 @foreach (Location location in locations)
                 {
+
+
+
+                    @if (!location.RenduFilm)
                     {
+
                         <tr>
                             <td>
                                 @location.DateRetourLocation
