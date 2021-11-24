@@ -13,48 +13,36 @@
             <thead>
                 <tr>
                     <th>
-                      Nom du film
                     </th>
                     <th>
-                       Date sortie
+                        Titre du film
                     </th>
                     <th>
-                      Nb Location
-                    </th>
-                    <th>
-                    Disponibilité
-                    </th>
-                    <th>Catégorie
+                        Nombre d'emprunts
                     </th>
                     <th></th>
                 </tr>
             </thead>
-
-
-           
-            
+            @if (films != null)
+            {
                 @foreach (Film film in films)
                 {
-        <tr>
+                    <tr>
+                        <td></td>
+                        <td>@film.NomFilm</td>
+                        <td>@film.NbLocationsFilm</td>
+                        <td><a asp-controller="Films" asp-action="Details" asp-route-id="@film.Id">Details</a></td>
 
-            <td>
-                @film.NomFilm
-            <td>
-                @film.DateSortieFilm
-            </td>
-            <td>@film.NbLocationsFilm</td>
-
-            <td>@film.DisponibiliteFilm</td>
-            <td>@film.CategorieFilm</td>
-        </tr>
+                    </tr>
                 }
+            }
+
 
         </table>
     </div>
 
     <div class="col">
         <h1>Location en cours</h1>
-
         <table class="table">
             <thead>
                 <tr>
@@ -68,20 +56,24 @@
                 </tr>
             </thead>
 
-
-
-            @foreach (Location loc in locations)
+            @if (locations == null)
+            {
+                @foreach (Location location in locations)
                 {
-                    <tr>
-
-                        <td>
-                            @loc.DateRetourLocation
-                        <td>
-                            @loc.FilmId
-                        </td>
-                        <td>  <a asp-action="Delete" asp-route-id="@loc.Id">Retourner</a> |</td>
-                    </tr>
+                    {
+                        <tr>
+                            <td>
+                                @location.DateRetourLocation
+                            <td>
+                                @location.LocationFilmId.NomFilm
+                            </td>
+                            <td>
+                                <a asp-controller="Locations" asp-action="ReturnFilm" asp-route-id="@location.Id">Retourner</a>
+                            </td>
+                        </tr>
+                    }
                 }
+            }
 
         </table>
 

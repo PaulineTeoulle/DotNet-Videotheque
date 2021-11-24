@@ -67,19 +67,68 @@
                         @Html.DisplayFor(modelItem => item.DateRetourLocation)
                     </td>
                     <td>
-                        <button asp-action="RetournerFilm" asp-route-id="@item.Id">Retourner</button>
+
+                        <a asp-action="ReturnFilm" asp-route-id="@item.Id">Rendre le film</a>
                     </td>
                 }
-                else
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationClientId)
+            </th>
+            <th>
+                Email du client
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocationFilmId)
+            </th>
+            <th>
+                Réalisateur du film
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateRetourLocation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                @if ((bool)item.RenduFilm)
                 {
                     <td>
-                        Aucune location
+                        @Html.DisplayFor(modelItem => item.LocationClientId.NomClient)
+                        @Html.DisplayFor(modelItem => item.LocationClientId.PrenomClient)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocationClientId.MailClient)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocationFilmId.NomFilm)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LocationFilmId.RealisateurFilm)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateRetourLocation)
+                    </td>
+                    <td>
+Rendu
                     </td>
                 }
-
-
-
-
 
             </tr>
         }

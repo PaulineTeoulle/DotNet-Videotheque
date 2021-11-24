@@ -17,8 +17,6 @@ namespace MvcMovie.Controllers
 
         private readonly MvcMovieContext _context;
 
-
-    
         public HomeController(MvcMovieContext context)
         {
             _context = context;
@@ -26,10 +24,10 @@ namespace MvcMovie.Controllers
 
         public IActionResult Index()
         {
-
-            var movies = from m in _context.Film
-                         select m;
+            var movies = from m in _context.Film select m;
             ViewBag.Message = "Welcome to my demo!";
+
+            
             ViewData["Films"] = GetFilms();
             ViewData["Locations"] = GetLocations();
             return View();
@@ -39,7 +37,8 @@ namespace MvcMovie.Controllers
         {
             IEnumerable<Film> films = (from m in _context.Film
                                select m).ToList();
-            return films;
+            if (films.Count() == 0) return null;
+            else return films;
         }
 
 
@@ -47,7 +46,8 @@ namespace MvcMovie.Controllers
         {
             IEnumerable<Location> locations = (from m in _context.Location
                                             select m).ToList();
-            return locations;
+            if (locations.Count() == 0) return null;
+            else return locations;
         }
 
         public IActionResult Privacy()

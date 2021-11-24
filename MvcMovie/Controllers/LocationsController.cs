@@ -65,20 +65,20 @@ namespace MvcMovie.Controllers
             {
                 _context.Add(location);
                 //TODO : Modifier de +1 le nombre de location du client
-             /*   Film film = (from f in _context.Film where f.Id == location.Id select f).First();
-                if (film == null)
-                {
-                    return NotFound();
-                }
-                film.NbLocationsFilm++;
-                film.DisponibiliteFilm = false;
+                /*   Film film = (from f in _context.Film where f.Id == location.Id select f).First();
+                   if (film == null)
+                   {
+                       return NotFound();
+                   }
+                   film.NbLocationsFilm++;
+                   film.DisponibiliteFilm = false;
 
 
-                var film
-                 = await _context.Film 
-                 .Include(f => f.Id)
-               .Include(f => f.LocationFilmId)
-               .FirstOrDefaultAsync(m => m.Id == id);*/
+                   var film
+                    = await _context.Film 
+                    .Include(f => f.Id)
+                  .Include(f => f.LocationFilmId)
+                  .FirstOrDefaultAsync(m => m.Id == id);*/
 
 
 
@@ -154,6 +154,60 @@ namespace MvcMovie.Controllers
             return View(location);
         }
 
+
+        // GET: Locations/Edit/5
+        public async Task<IActionResult> ReturnFilm(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var location = await _context.Location.FindAsync(id);
+            if (location == null)
+            {
+                return NotFound();
+            }
+            return View(location);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ReturnFilmConfirmed(int id, [Bind("Id,FilmId,ClientId,DateRetourLocation,RenduFilm")] Location location)
+        {
+            if (id != location.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    location.RenduFilm =true;
+                    location.DateRetourLocation = DateTime.Now;
+                    _context.Update(location);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!LocationExists(location.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(location);
+        }
+
+
+
         // GET: Locations/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -161,7 +215,6 @@ namespace MvcMovie.Controllers
             {
                 return NotFound();
             }
-
             var location = await _context.Location
                 .Include(l => l.LocationClientId)
                 .Include(l => l.LocationFilmId)
@@ -189,5 +242,7 @@ namespace MvcMovie.Controllers
         {
             return _context.Location.Any(e => e.Id == id);
         }
+
+       
     }
 }
