@@ -49,8 +49,13 @@ namespace MvcMovie.Controllers
         // GET: Locations/Create
         public IActionResult Create()
         {
+
+            var films = from b in _context.Film
+                        where b.DisponibiliteFilm == true
+                        select b;
+
             ViewData["ClientId"] = new SelectList(_context.Client, "Id", "NomClient");
-            ViewData["FilmId"] = new SelectList(_context.Film, "Id", "NomFilm");
+            ViewData["FilmId"] = new SelectList(films, "Id", "NomFilm");
             return View();
         }
 
@@ -64,32 +69,10 @@ namespace MvcMovie.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(location);
-                //TODO : Modifier de +1 le nombre de location du client
-                /*   Film film = (from f in _context.Film where f.Id == location.Id select f).First();
-                   if (film == null)
-                   {
-                       return NotFound();
-                   }
-                   film.NbLocationsFilm++;
-                   film.DisponibiliteFilm = false;
-
-
-                   var film
-                    = await _context.Film 
-                    .Include(f => f.Id)
-                  .Include(f => f.LocationFilmId)
-                  .FirstOrDefaultAsync(m => m.Id == id);*/
-
-
-
-
-
-
-
-
-
-
-                //_context.Location.Add(location);
+                var film = _context.Film.Find(location.FilmId);
+                film.NbLocationsFilm++;
+                film.DisponibiliteFilm = false;
+                _context.Update(film);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -187,6 +170,9 @@ namespace MvcMovie.Controllers
                 {
                     location.RenduFilm =true;
                     location.DateRetourLocation = DateTime.Now;
+                    var film = _context.Film.Find(location.FilmId);
+                    film.DisponibiliteFilm = true;
+                    _context.Update(film);
                     _context.Update(location);
                     await _context.SaveChangesAsync();
                 }

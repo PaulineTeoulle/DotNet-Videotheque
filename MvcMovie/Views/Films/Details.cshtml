@@ -10,37 +10,42 @@
     <h4>Film</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.NomFilm)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NomFilm)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DateSortieFilm)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DateSortieFilm)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.NbLocationsFilm)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.NbLocationsFilm)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DisponibiliteFilm)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DisponibiliteFilm)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CategorieFilm)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CategorieFilm)
-        </dd>
-    </dl>
+            @if (Model.DisponibiliteFilm == true)
+            {
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.DisponibiliteFilm)
+            </dt>
+            <dd class="col-sm-10">
+                Oui
+            </dd>
+        }
+
+
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CategorieFilm)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CategorieFilm)
+            </dd>
+        </dl>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
