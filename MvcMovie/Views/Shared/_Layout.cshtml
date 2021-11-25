@@ -6,30 +6,34 @@
     <title>@ViewData["Title"] - Movie App</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="@Url.Content("~/css/Site.css")" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="~/ProjetVideotheque.styles.css" />
 </head>
 <body>
-    <div class="row content-custom">
-        <div class="col-1">
-            <nav class="nav flex-column navbar-custom">
-                <p class="icon">
-                    <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><img src="@Url.Content("~/home.png")" alt="Home"/></a>
-                </p>
-                <p class="icon">
-                    <a class="nav-link" asp-area="" asp-controller="Films" asp-action="Index"><img class="icon" src="@Url.Content("~/clap.png")" alt="Films" /></a>
-                </p>
-                <p class="icon">
-                    <a class="nav-link" asp-area="" asp-controller="Clients" asp-action="Index"><img class="icon" src="@Url.Content("~/user.png")" alt="Clients" /></a>
-                </p>
-                <p class="icon">
-                    <a class="nav-link" asp-area="" asp-controller="Locations" asp-action="Index"><img class="icon" src="@Url.Content("~/clock.png")" alt="Locations" /></a>
-                </p>
-            </nav>
-        </div>
-        <div class="col">
+    <div class="wrapper">
+
+        <!-- Sidebar -->
+        <nav id="sidebar">
+            <p class="icon">
+                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><img src="@Url.Content("~/home.png")" alt="Home" /></a>
+            </p>
+            <p class="icon">
+                <a class="nav-link" asp-area="" asp-controller="Films" asp-action="Index"><img class="icon" src="@Url.Content("~/clap.png")" alt="Films" /></a>
+            </p>
+            <p class="icon">
+                <a class="nav-link" asp-area="" asp-controller="Clients" asp-action="Index"><img class="icon" src="@Url.Content("~/user.png")" alt="Clients" /></a>
+            </p>
+            <p class="icon">
+                <a class="nav-link" asp-area="" asp-controller="Locations" asp-action="Index"><img class="icon" src="@Url.Content("~/clock.png")" alt="Locations" /></a>
+            </p>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="content">
             <main role="main">
                 @RenderBody()
             </main>
         </div>
+       
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
