@@ -1,0 +1,82 @@
+﻿@model IEnumerable<ProjetVideotheque.Models.Film>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="row custom-row">
+
+    <form asp-controller="Film" asp-action="Index" method="get">
+        <p>
+            <input type="text" name="SearchString" placeholder="Rechercher un film" />
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
+
+    <p class=" offset-md-8">
+        <button class="btn btn-primary " onclick="location.href='@Url.Action("Create", "Films")'">+ Ajouter un film</button>
+    </p>
+
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomFilm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CategorieFilm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RealisateurFilm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateSortieFilm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisponibiliteFilm)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomFilm)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CategorieFilm)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RealisateurFilm)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateSortieFilm.Year)
+                </td>
+                <td>
+                    @if ((bool)item.DisponibiliteFilm)
+                    {
+                        <p class="itemDispo">Disponible</p>
+                    }
+                    else
+                    {
+                        <p class="itemNonDispo">Indisponible</p>
+                    }
+
+                </td>
+
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

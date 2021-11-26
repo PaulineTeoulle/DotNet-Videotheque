@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ProjetVideotheque.Models.Client>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="row custom-row">
+
+    <form asp-controller="Client" asp-action="Index" method="get">
+        <p>
+            <input type="text" name="SearchString" placeholder="Rechercher un client" />
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
+
+    <p class=" offset-md-8">
+        <button class="btn btn-primary " onclick="location.href='@Url.Action("Create", "Clients")'">+ Ajouter un client</button>
+    </p>
+
+</div>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomClient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrenomClient)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MailClient)
+            </th> 
+            <th>
+              Nombre d'emprunt
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomClient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrenomClient)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MailClient)
+            </td>
+            <td>
+               NB
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
