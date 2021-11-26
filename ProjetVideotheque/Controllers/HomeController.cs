@@ -36,7 +36,7 @@ namespace ProjetVideotheque.Controllers
         private IEnumerable<Film> GetFilms()
         {
             IEnumerable<Film> films = (from m in _context.Film
-                               select m).ToList();
+                               select m).Distinct().ToList();
             if (films.Count() == 0) return null;
             else return films;
         }

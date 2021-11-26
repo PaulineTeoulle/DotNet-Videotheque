@@ -3,82 +3,84 @@
 
     IEnumerable<Film> films = ViewData["Films"] as IEnumerable<Film>;
     IEnumerable<Location> locations = ViewData["Locations"] as IEnumerable<Location>;
+    int counter = 0;
 }
 
-<div class="row">
-    <div class="col">
-        <h1>Les plus loués</h1>
-
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                    </th>
-                    <th>
-                        Titre du film
-                    </th>
-                    <th>
-                        Nombre d'emprunts
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            @if (films != null)
-            {
-                @foreach (Film film in films)
-                {
+<div class="row justify-content-around" >
+    <div class="col-4 col-md-auto ">
+            <h1>Les plus loués</h1>
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <td></td>
-                        <td>@film.NomFilm</td>
-                        <td>@film.NbLocationsFilm</td>
-                        <td><a asp-controller="Films" asp-action="Details" asp-route-id="@film.Id">Details</a></td>
-
+                        <th scope="col">
+                        </th>
+                        <th scope="col">
+                            Titre du film
+                        </th>
+                        <th scope="col">
+                            Nombre d'emprunts
+                        </th>
+                        <th scope="col"></th>
                     </tr>
+                </thead>
+                @if (films != null)
+                {
+                        @foreach (Film film in films)
+                        {
+                            <tr scope="row">
+                                <td  class="col-xs-1 text-center">@(++counter)</td>
+                                <td>@film.NomFilm</td>
+                                <td  class="col-xs-1 text-center">@film.NbLocationsFilm</td>
+                                <td><a asp-controller="Films" asp-action="Details" asp-route-id="@film.Id">Details</a></td>
+                            </tr>
+                        }
+
                 }
-            }
 
 
-        </table>
+            </table>
     </div>
 
-    <div class="col">
-        <h1>Location en cours</h1>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        Date retour
-                    </th>
-                    <th>
-                        Titre film
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
+    <div class="col-4 col-md-auto">
+        <div id="wrapperBox">
+            <h1>Location en cours</h1>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col" >
+                            Date retour
+                        </th>
+                        <th scope="col">
+                            Titre film
+                        </th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
 
-            @if (locations != null)
-            {
-                @foreach (Location location in locations)
+                @if (locations != null)
                 {
-                    @if (!location.RenduFilm)
+                    @foreach (Location location in locations)
                     {
+                        @if (!location.RenduFilm)
+                        {
 
-                        <tr>
-                            <td>
-                                @location.DateRetourLocation
-                            <td>
-                                @location.LocationFilmId.NomFilm
-                            </td>
-                            <td>
-                                <a asp-controller="Locations" asp-action="ReturnFilm" asp-route-id="@location.Id">Retourner</a>
-                            </td>
-                        </tr>
+                            <tr scope="row">
+                                <td>
+                                    @location.DateRetourLocation
+                                <td>
+                                    @location.LocationFilmId.NomFilm
+                                </td>
+                                <td>
+                                    <a asp-controller="Locations" asp-action="ReturnFilm" asp-route-id="@location.Id">Retourner</a>
+                                </td>
+                            </tr>
+                        }
                     }
                 }
-            }
 
-        </table>
+            </table>
+
+        </div>
 
     </div>
-
 </div>
