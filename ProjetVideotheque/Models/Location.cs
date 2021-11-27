@@ -24,7 +24,7 @@ namespace ProjetVideotheque.Models
         public int ClientId { get; set; }
 
 
-        [DisplayFormat(HtmlEncode = false, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(HtmlEncode = false, DataFormatString = "{0:d}")]
         [Display(Name = "Date de retour")]
         public DateTime DateRetourLocation { get; set; }
         public Boolean RenduFilm { get; set; }

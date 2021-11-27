@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Movie App</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link href="@Url.Content("~/css/Site.css")" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/ProjetVideotheque.styles.css" />
 </head>
 <body>
@@ -28,8 +29,7 @@
         </nav>
 
         <!-- Page Content -->
-        <div id="content">
-
+        <div class="w-100 p-3 customisedBackground">
                 @RenderBody()
         </div>
        

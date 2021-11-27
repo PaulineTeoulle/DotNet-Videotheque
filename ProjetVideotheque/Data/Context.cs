@@ -14,10 +14,10 @@ namespace ProjetVideotheque.Data
         {
         }
 
-        public DbSet<ProjetVideotheque.Models.Film> Film { get; set; }
+        public DbSet<Film> Film { get; set; }
 
-        public DbSet<ProjetVideotheque.Models.Client> Client { get; set; }
+        public DbSet<Client> Client { get; set; }
 
-        public DbSet<ProjetVideotheque.Models.Location> Location { get; set; }
+        public DbSet<Location> Location { get; set; }
     }
 }

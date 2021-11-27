@@ -6,54 +6,56 @@
     int counter = 0;
 }
 
-<div class="row justify-content-around" >
-    <div class="col-4 col-md-auto ">
+<div class="row  w-100 p-3">
+    <div class="col ">
+
+        <div class="container">
+
             <h1>Les plus loués</h1>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">
+                        <th scope="col" style="width: 10%;">
                         </th>
-                        <th scope="col">
+                        <th scope="col" style="width: 60%;">
                             Titre du film
                         </th>
-                        <th scope="col">
-                            Nombre d'emprunts
+                        <th scope="col" style="width: 20%;">
+                            Nb. emprunts
                         </th>
-                        <th scope="col"></th>
+                        <th scope="col" style="width: 10%;"></th>
                     </tr>
                 </thead>
                 @if (films != null)
                 {
-                        @foreach (Film film in films)
-                        {
-                            <tr scope="row">
-                                <td  class="col-xs-1 text-center">@(++counter)</td>
-                                <td>@film.NomFilm</td>
-                                <td  class="col-xs-1 text-center">@film.NbLocationsFilm</td>
-                                <td><a asp-controller="Films" asp-action="Details" asp-route-id="@film.Id">Details</a></td>
-                            </tr>
-                        }
-
+                    @foreach (Film film in films)
+                    {
+                        <tr scope="row">
+                            <th class="text-center">@(++counter)</th>
+                            <td>@film.NomFilm</td>
+                            <td class="text-center">@film.NbLocationsFilm</td>
+                            <td><a asp-controller="Films" asp-action="Details" asp-route-id="@film.Id">Details</a></td>
+                        </tr>
+                    }
                 }
-
-
             </table>
+
+        </div>
     </div>
 
-    <div class="col-4 col-md-auto">
-        <div id="wrapperBox">
-            <h1>Location en cours</h1>
+    <div class="col ">
+        <div class="container">
+            <h1>Prochainement rapporté</h1>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col" >
-                            Date retour
+                        <th scope="col" style="width: 15%;">
+                            Retour
                         </th>
-                        <th scope="col">
-                            Titre film
+                        <th scope="col" style="width: 70%;">
+                            Titre du film
                         </th>
-                        <th scope="col"></th>
+                        <th scope="col"  style="width: 15%;"></th>
                     </tr>
                 </thead>
 
@@ -63,11 +65,10 @@
                     {
                         @if (!location.RenduFilm)
                         {
-
                             <tr scope="row">
                                 <td>
-                                    @location.DateRetourLocation
-                                <td>
+                                    @location.DateRetourLocation.ToShortDateString()
+<td>
                                     @location.LocationFilmId.NomFilm
                                 </td>
                                 <td>
@@ -79,8 +80,7 @@
                 }
 
             </table>
-
         </div>
-
     </div>
+
 </div>
