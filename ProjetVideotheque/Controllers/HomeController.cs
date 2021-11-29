@@ -38,7 +38,7 @@ namespace ProjetVideotheque.Controllers
             IEnumerable<Film> films = (from m in _context.Film
                                select m).Distinct().ToList();
             if (films.Count() == 0) return null;
-            else return films;
+            else return films.OrderByDescending(film => film.NbLocationsFilm).Take(10);
         }
 
 
@@ -46,6 +46,7 @@ namespace ProjetVideotheque.Controllers
         {
             IEnumerable<Location> locations = (from m in _context.Location
                                             select m).ToList();
+
             if (locations.Count() == 0) return null;
             else return locations;
         }
