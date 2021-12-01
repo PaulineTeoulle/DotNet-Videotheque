@@ -4,133 +4,133 @@
     ViewData["Title"] = "Index";
 }
 
+<div class="row">
 
-<div class="row custom-row">
-
-    <form asp-controller="Location" asp-action="Index" method="get">
-        <p>
-            <input type="text" name="SearchString" placeholder="Rechercher une location" />
-            <input type="submit" value="Filter" />
-        </p>
-    </form>
-
-    <p class=" offset-md-8">
+    <div class="col">
+        <form asp-controller="Locations" asp-action="Index" method="get">
+            <p>
+                <input type="text" name="SearchString" placeholder="Rechercher un emprunt" />
+                <input type="submit" value="Filter" />
+            </p>
+        </form>
+    </div>
+    <div class="col">
         <button class="btn btn-primary " onclick="location.href='@Url.Action("Create", "Locations")'">+ Ajouter un emprunt</button>
-    </p>
-
+    </div>
 </div>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.LocationClientId)
-            </th>
-            <th>
-                Email du client
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LocationFilmId)
-            </th>
-            <th>
-                Réalisateur du film
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateRetourLocation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach (var item in Model)
-        {
+<div class="row">
+    <table class="table">
+        <thead>
             <tr>
-
-                @if (!(bool)item.RenduFilm)
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationClientId.NomClient)
-                        @Html.DisplayFor(modelItem => item.LocationClientId.PrenomClient)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationClientId.MailClient)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationFilmId.NomFilm)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationFilmId.RealisateurFilm)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateRetourLocation)
-                    </td>
-                    <td>
-
-                        <a asp-action="ReturnFilm" asp-route-id="@item.Id">Rendre le film</a>
-                    </td>
-                }
-
+                <th>
+                    @Html.DisplayNameFor(model => model.LocationClientId)
+                </th>
+                <th>
+                    Email du client
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LocationFilmId)
+                </th>
+                <th>
+                    Réalisateur du film
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateRetourLocation)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    @if (!(bool)item.RenduFilm)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationClientId.NomClient)
+                            @Html.DisplayFor(modelItem => item.LocationClientId.PrenomClient)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationClientId.MailClient)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationFilmId.NomFilm)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationFilmId.RealisateurFilm)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateRetourLocation)
+                        </td>
+                        <td>
+
+                            <a asp-action="ReturnFilm" asp-route-id="@item.Id">Rendre le film</a>
+                        </td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
 
 
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.LocationClientId)
-            </th>
-            <th>
-                Email du client
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LocationFilmId)
-            </th>
-            <th>
-                Réalisateur du film
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateRetourLocation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-
-        @foreach (var item in Model)
-        {
+    <table class="table">
+        <thead>
             <tr>
-
-                @if ((bool)item.RenduFilm)
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationClientId.NomClient)
-                        @Html.DisplayFor(modelItem => item.LocationClientId.PrenomClient)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationClientId.MailClient)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationFilmId.NomFilm)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationFilmId.RealisateurFilm)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateRetourLocation)
-                    </td>
-                    <td>
-Rendu
-                    </td>
-                }
-
+                <th>
+                    @Html.DisplayNameFor(model => model.LocationClientId)
+                </th>
+                <th>
+                    Email du client
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LocationFilmId)
+                </th>
+                <th>
+                    Réalisateur du film
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateRetourLocation)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    @if ((bool)item.RenduFilm)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationClientId.NomClient)
+                            @Html.DisplayFor(modelItem => item.LocationClientId.PrenomClient)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationClientId.MailClient)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationFilmId.NomFilm)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationFilmId.RealisateurFilm)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateRetourLocation)
+                        </td>
+                        <td>
+                            Rendu
+                        </td>
+                    }
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

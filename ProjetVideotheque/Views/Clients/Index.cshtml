@@ -5,9 +5,9 @@
 }
 
 
-<div class="row custom-row">
+<div class="row ">
 
-    <form asp-controller="Client" asp-action="Index" method="get">
+    <form asp-controller="Clients" asp-action="Index" method="get">
         <p>
             <input type="text" name="SearchString" placeholder="Rechercher un client" />
             <input type="submit" value="Filter" />
@@ -56,9 +56,9 @@
                NB
             </td>
             <td>
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/details.png")" alt="detailsClient" /></a> 
+                <a asp-action="Edit" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/edit.png")" alt="editClient" /></a> 
+                <a asp-action="Delete" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/delete.png")" alt="deleteClient" /></a>
             </td>
         </tr>
         }

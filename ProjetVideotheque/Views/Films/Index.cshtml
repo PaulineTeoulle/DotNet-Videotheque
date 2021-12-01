@@ -4,20 +4,18 @@
     ViewData["Title"] = "Index";
 }
 
+<div class="row">
+    <form asp-controller="Films" asp-action="Index" method="get">
+        <p>
+            <input type="text" name="SearchString" placeholder="Rechercher un film" />
+            <input type="submit" value="Filter" />
+        </p>
+    </form>
 
-<div class="container">
-    <div class="row">
-        <div class="col-8">
-            <form asp-controller="Films" asp-action="Index" method="get">
-                <div>
-                    <input type="text" name="SearchString" placeholder="Rechercher un film" />
-                    <input type="submit" value="Rechercher" />
-                </div>
-            </form>
-        </div>
-
-        <div class="col-4 "> <button class="btn btn-primary " onclick="location.href='@Url.Action("Create", "Films")'">+ Ajouter un film</button></div>
-    </div>
+    <p class=" offset-md-8">
+        <button class="btn btn-primary " onclick="location.href='@Url.Action("Create", "Films")'">+ Ajouter un film</button>
+    </p>
+</div>
 
 
     <div class="row">
@@ -73,13 +71,12 @@
                         </td>
 
                         <td>
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <a asp-action="Details" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/details.png")" alt="detailsFilm" /></a> 
+                            <a asp-action="Edit" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/edit.png")" alt="editFilm" /></a> 
+                            <a asp-action="Delete" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/delete.png")" alt="deleteFilm" /></a>
                         </td>
                     </tr>
                 }
             </tbody>
          </table>
     </div>
-</div>

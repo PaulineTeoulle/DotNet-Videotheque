@@ -34,7 +34,7 @@
                             <th class="text-center">@(++counter)</th>
                             <td>@film.NomFilm</td>
                             <td class="text-center">@film.NbLocationsFilm</td>
-                            <td><a asp-controller="Films" asp-action="Details" asp-route-id="@film.Id">Details</a></td>
+                            <td ><a asp-controller="Films" asp-action="Details" asp-route-id="@film.Id"><img class="smallIcon" src="@Url.Content("~/details.png")" alt="detailsFilm" /></a></td>
                         </tr>
                     }
                 }
