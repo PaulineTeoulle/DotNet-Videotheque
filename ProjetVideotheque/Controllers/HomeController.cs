@@ -24,9 +24,6 @@ namespace ProjetVideotheque.Controllers
 
         public IActionResult Index()
         {
-            var movies = from m in _context.Film select m;
-            ViewBag.Message = "Welcome to my demo!";
-
             
             ViewData["Films"] = GetFilms();
             ViewData["Locations"] = GetLocations();

@@ -16,14 +16,13 @@ namespace ProjetVideotheque.Migrations
                     NomClient = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PrenomClient = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     AdresseClient = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    MailClient = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    MailClient = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NbFilmsLoues = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Client", x => x.Id);
                 });
-
-          
 
             migrationBuilder.CreateTable(
                 name: "Film",
@@ -41,7 +40,6 @@ namespace ProjetVideotheque.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Film", x => x.Id);
-                  
                 });
 
             migrationBuilder.CreateTable(
@@ -72,8 +70,6 @@ namespace ProjetVideotheque.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-         
-
             migrationBuilder.CreateIndex(
                 name: "IX_Location_ClientId",
                 table: "Location",
@@ -95,7 +91,6 @@ namespace ProjetVideotheque.Migrations
 
             migrationBuilder.DropTable(
                 name: "Film");
-
         }
     }
 }

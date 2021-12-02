@@ -34,7 +34,7 @@
                 @Html.DisplayNameFor(model => model.MailClient)
             </th> 
             <th>
-              Nombre d'emprunt
+              Nombre d'emprunts total
             </th>
             <th></th>
         </tr>
@@ -53,7 +53,7 @@
                 @Html.DisplayFor(modelItem => item.MailClient)
             </td>
             <td>
-               NB
+                @Html.DisplayFor(modelItem => item.NbFilmsLoues)
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/details.png")" alt="detailsClient" /></a> 

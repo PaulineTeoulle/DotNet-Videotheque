@@ -34,6 +34,9 @@ namespace ProjetVideotheque.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("NbFilmsLoues")
+                        .HasColumnType("int");
+
                     b.Property<string>("NomClient")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -71,13 +74,11 @@ namespace ProjetVideotheque.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-
                     b.Property<string>("RealisateurFilm")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
 
                     b.ToTable("Film");
                 });
@@ -109,9 +110,6 @@ namespace ProjetVideotheque.Migrations
 
                     b.ToTable("Location");
                 });
-
-          
-       
 
             modelBuilder.Entity("ProjetVideotheque.Models.Location", b =>
                 {

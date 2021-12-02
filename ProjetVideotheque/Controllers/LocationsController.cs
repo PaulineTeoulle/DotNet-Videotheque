@@ -69,10 +69,16 @@ namespace ProjetVideotheque.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(location);
+
                 var film = _context.Film.Find(location.FilmId);
                 film.NbLocationsFilm++;
                 film.DisponibiliteFilm = false;
                 _context.Update(film);
+
+                var client = _context.Client.Find(location.ClientId);
+                client.NbFilmsLoues++;
+                _context.Update(client);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

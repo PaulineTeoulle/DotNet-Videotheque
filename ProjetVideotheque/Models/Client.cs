@@ -27,6 +27,15 @@ namespace ProjetVideotheque.Models
             [Required(ErrorMessage = "Le mail du client est requis.")]
             [EmailAddress]
             public string MailClient { get; set; }
+
+            public int NbFilmsLoues { get; set; }
+
+
+        public Client()
+        {
+            // quand le film est créé, il est de suite disponible à la location
+            this.NbFilmsLoues = 0;
         }
+    }
     
 }

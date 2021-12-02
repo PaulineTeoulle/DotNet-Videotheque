@@ -10,7 +10,7 @@ using ProjetVideotheque.Data;
 namespace ProjetVideotheque.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20211103130432_InitialCreate")]
+    [Migration("20211202143902_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,9 @@ namespace ProjetVideotheque.Migrations
                     b.Property<string>("MailClient")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NbFilmsLoues")
+                        .HasColumnType("int");
 
                     b.Property<string>("NomClient")
                         .IsRequired()
@@ -73,12 +76,11 @@ namespace ProjetVideotheque.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RealisateurId")
-                        .HasColumnType("int");
+                    b.Property<string>("RealisateurFilm")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("RealisateurId");
 
                     b.ToTable("Film");
                 });
@@ -109,37 +111,6 @@ namespace ProjetVideotheque.Migrations
                     b.HasIndex("FilmId");
 
                     b.ToTable("Location");
-                });
-
-            modelBuilder.Entity("ProjetVideotheque.Models.Realisateur", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("NomRealisateur")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PrenomRealisateur")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Realisateur");
-                });
-
-            modelBuilder.Entity("ProjetVideotheque.Models.Film", b =>
-                {
-                    b.HasOne("ProjetVideotheque.Models.Realisateur", "FilmRealisateurId")
-                        .WithMany()
-                        .HasForeignKey("RealisateurId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("FilmRealisateurId");
                 });
 
             modelBuilder.Entity("ProjetVideotheque.Models.Location", b =>
