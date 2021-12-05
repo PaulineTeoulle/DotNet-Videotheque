@@ -91,42 +91,26 @@ tbody {
     color: red;
 }
 
-.addClient {
+.addClient, .addFilm {
     margin: auto;
     width: 50%;
     margin-top:100px;
 }
 
-#lastName {
+#lastName, #firstName {
     display: inline-block;
-    width:45%;
-}
-
-#firstName {
-    display: inline-block;
-    width: 45%;
-}
-
-#address {
-    width:90%
-}
-#mail {
-    width: 90%
+    width:49%;
 }
 
 .groupButton {
     margin-top:50px;
 }
 
-#saveAction {
+#saveAction, #cancelAction, #titre,#year {
     display: inline-block;
-    width:45%;
+    width:49%;
 }
 
-#cancelAction {
-    display: inline-block;
-    width: 45%;
-}
 
 #cancelActionInput {
     border: 2px solid rgb(184,184,184);
@@ -139,3 +123,5 @@ tbody {
     width: 100%;
     border: 2px solid rgb(184,184,184);
 }
+
+
