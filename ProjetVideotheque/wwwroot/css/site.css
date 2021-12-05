@@ -31,13 +31,18 @@ p{
     background-color: rgb(69,170,242);
 }
 
+.form-control {
+    border: none;
+    border-bottom: 2px solid rgb(184,184,184);
+}
 
 input[type=button] {
     border: 1px solid rgb(45,152,218);
     border-radius: 5px;
     padding-left:25px;
     padding-right:25px;
-} 
+}
+
 .smallIcon {
     height: 24px;
     width: 24px;
@@ -47,6 +52,7 @@ input[type=button] {
     background-color: rgb(45,152,218);
     border: none;
     padding: 10px 40px 10px 40px;
+    border: 2px solid rgb(184,184,184);
 }
 
 .customisedBackground {
@@ -83,4 +89,53 @@ tbody {
 }
 .itemNonDispo{
     color: red;
+}
+
+.addClient {
+    margin: auto;
+    width: 50%;
+    margin-top:100px;
+}
+
+#lastName {
+    display: inline-block;
+    width:45%;
+}
+
+#firstName {
+    display: inline-block;
+    width: 45%;
+}
+
+#address {
+    width:90%
+}
+#mail {
+    width: 90%
+}
+
+.groupButton {
+    margin-top:50px;
+}
+
+#saveAction {
+    display: inline-block;
+    width:45%;
+}
+
+#cancelAction {
+    display: inline-block;
+    width: 45%;
+}
+
+#cancelActionInput {
+    border: 2px solid rgb(184,184,184);
+    background-color: white;
+    width: 100%;
+    padding: 10px 40px 10px 40px;
+}
+
+#saveActionInput {
+    width: 100%;
+    border: 2px solid rgb(184,184,184);
 }
