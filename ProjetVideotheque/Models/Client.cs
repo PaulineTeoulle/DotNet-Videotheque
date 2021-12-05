@@ -28,6 +28,7 @@ namespace ProjetVideotheque.Models
             [EmailAddress]
             public string MailClient { get; set; }
 
+            [Display(Name = "Nombre de films loués")]
             public int NbFilmsLoues { get; set; }
 
 

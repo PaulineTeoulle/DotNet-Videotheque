@@ -4,39 +4,37 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
 
-<div>
-    <h4>Client</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NomClient)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NomClient)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PrenomClient)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PrenomClient)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AdresseClient)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AdresseClient)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MailClient)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MailClient)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="details">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.NomClient)</th>
+                <th>@Html.DisplayNameFor(model => model.PrenomClient)</th>
+                <th> @Html.DisplayNameFor(model => model.AdresseClient)</th>
+                <th> @Html.DisplayNameFor(model => model.MailClient)</th>
+                <th> @Html.DisplayNameFor(model => model.NbFilmsLoues)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>   @Html.DisplayFor(model => model.NomClient)</th>
+                <td>   @Html.DisplayFor(model => model.PrenomClient)</td>
+                <td>   @Html.DisplayFor(model => model.AdresseClient)</td>
+                <td> @Html.DisplayFor(model => model.MailClient)</td>
+                <td> @Html.DisplayFor(model => model.NbFilmsLoues)</td>
+
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="groupButton">
+        <div id="saveAction">
+            <a asp-action="Edit" asp-route-id="@Model.Id"><input type="button" class="btn btn-primary" id="saveActionInput" value="Editer" /></a>
+        </div>
+        <div id="cancelAction">
+            <a asp-action="Index"><input type="button" id="cancelActionInput" value="Annuler" /></a>
+        </div>
+    </div>
 </div>
