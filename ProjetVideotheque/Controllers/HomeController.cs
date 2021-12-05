@@ -1,14 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using ProjetVideotheque.Data;
 using ProjetVideotheque.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Dynamic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjetVideotheque.Controllers
 {
@@ -33,9 +29,8 @@ namespace ProjetVideotheque.Controllers
         private IEnumerable<Film> GetFilms()
         {
             IEnumerable<Film> films = (from m in _context.Film
-                               select m).Distinct().ToList();
-            if (films.Count() == 0) return null;
-            else return films.OrderByDescending(film => film.NbLocationsFilm).Take(10);
+                                       select m).Distinct().ToList();
+            return !films.Any() ? null : films.OrderByDescending(film => film.NbLocationsFilm).Take(10);
         }
 
 

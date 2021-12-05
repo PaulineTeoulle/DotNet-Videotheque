@@ -31,9 +31,17 @@ p{
     background-color: rgb(69,170,242);
 }
 
+
+input[type=button] {
+    border: 1px solid rgb(45,152,218);
+    border-radius: 5px;
+    padding-left:25px;
+    padding-right:25px;
+} 
 .smallIcon {
     height: 24px;
     width: 24px;
+    margin-left:20px;
 }
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: rgb(45,152,218);
@@ -68,4 +76,11 @@ tbody {
         font-weight: normal;
         font-size: 0.8em;
         border: hidden;
+}
+
+.itemDispo{
+    color: green;
+}
+.itemNonDispo{
+    color: red;
 }
