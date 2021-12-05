@@ -91,7 +91,7 @@ tbody {
     color: red;
 }
 
-.addClient, .addFilm {
+.addClient, .addFilm, .editClient, .editFilm {
     margin: auto;
     width: 50%;
     margin-top:100px;
