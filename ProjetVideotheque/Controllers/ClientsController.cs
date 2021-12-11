@@ -19,11 +19,26 @@ namespace ProjetVideotheque.Controllers
             _context = context;
         }
 
+      
+
         // GET: Clients
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-           
-            return View(await _context.Client.ToListAsync());
+
+            var clients = from m in _context.Client
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                // movies = movies.Where(s => s.NomFilm.Contains(searchString));  
+                clients = clients.Where(s => s.NomClient.Contains(searchString) || 
+                                                s.PrenomClient.Contains(searchString) ||
+                                                s.AdresseClient.Contains(searchString) ||
+                                                s.MailClient.Contains(searchString));
+
+            }
+
+            return View(await clients.ToListAsync());
         }
 
 
@@ -38,10 +53,19 @@ namespace ProjetVideotheque.Controllers
 
             var client = await _context.Client
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+
             if (client == null)
             {
                 return NotFound();
             }
+
+
+
+            IEnumerable<Location> locations = GetLocationsForOneClient(id).Distinct();
+            ViewData["Locations"] = locations;
+
+
 
             return View(client);
         }
@@ -152,5 +176,46 @@ namespace ProjetVideotheque.Controllers
         {
             return _context.Client.Any(e => e.Id == id);
         }
+
+        // GET: Clients/Facture
+        public async Task<IActionResult> Facture(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var client = await _context.Client
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (client == null)
+            {
+                return NotFound();
+            }
+
+            IEnumerable<Location> locations = GetLocationsForOneClient(id);
+            ViewData["Locations"] = locations;
+            return View(client);
+        }
+
+        private IEnumerable<Location> GetLocationsForOneClient(int? id)
+        {
+
+            if(id== null)
+            {
+                return null;
+            }
+            IEnumerable<Location> locations = _context.Location
+                .Where(m => m.ClientId == id && m.RenduFilm == false)
+               .Include(l => l.LocationClientId)
+               .Include(l => l.LocationFilmId).ToList();
+
+
+            if (!locations.Any()) return null;
+            else return locations.Distinct();
+        }
+
+       
+
     }
 }

@@ -55,6 +55,13 @@ input[type=button] {
     border: 2px solid rgb(184,184,184);
 }
 
+.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    background-color: #e55039;
+    border: none;
+    padding: 10px 40px 10px 40px;
+    border: 2px solid rgb(184,184,184);
+}
+
 .customisedBackground {
     background-color: rgb(255, 252, 252);
 }
@@ -95,24 +102,24 @@ th {
     color: red;
 }
 
-.addClient, .addFilm, .editClient, .editFilm, .details {
+.addClient, .addFilm, .addLocation, .editClient, .editFilm, .details {
     margin: auto;
     width: 50%;
     margin-top: 100px;
 }
 
-#lastName, #firstName {
-    display: inline-block;
+#lastName, #firstName, #search, #button {
+  display: inline-block;
     width:49%;
 }
 
 .groupButton {
     margin-top:50px;
+    display:flex;
 }
 
 #saveAction, #cancelAction, #titre,#year {
-    display: inline-block;
-    width:49%;
+    width:50%;
 }
 
 

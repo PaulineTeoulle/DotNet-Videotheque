@@ -39,7 +39,7 @@ namespace ProjetVideotheque.Controllers
             IEnumerable<Location> locations = (from m in _context.Location
                                             select m).ToList();
 
-            if (locations.Count() == 0) return null;
+            if (!locations.Any()) return null;
             else return locations;
         }
 

@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Details";
+    IEnumerable<Location> locations = ViewData["Locations"] as IEnumerable<Location>;
 }
 
 <div class="details">
@@ -13,6 +14,7 @@
                 <th> @Html.DisplayNameFor(model => model.NbLocationsFilm)</th>
                 <th> @Html.DisplayNameFor(model => model.DisponibiliteFilm)</th>
                 <th> @Html.DisplayNameFor(model => model.CategorieFilm)</th>
+                <th> @Html.DisplayNameFor(model => model.PrixParJour)</th>
             </tr>
         </thead>
 
@@ -22,27 +24,44 @@
                 <td>   @Html.DisplayFor(model => model.DateSortieFilm)</td>
                 <td>   @Html.DisplayFor(model => model.NbLocationsFilm)</td>
 
-                    @if (ViewBag.disponibilite == true)
-                    {
-                        <td class="itemDispo">Disponible</td>
-                    }
-                    else
-                    {
-            <td class="itemNonDispo">Indisponible</td>
-                    }
+                @if (ViewBag.disponibilite == true)
+                {
+                    <td class="itemDispo">Disponible</td>
+                }
+                else
+                {
+                    <td class="itemNonDispo">Indisponible</td>
+                }
 
                 <td>
                     @Html.DisplayFor(model => model.CategorieFilm)
                 </td>
+                <td>   @Html.DisplayFor(model => model.PrixParJour)</td>
 
             </tr>
-          
+
         </tbody>
-      
+
     </table>
 
+    @if (ViewBag.disponibilite == false)
+    {
+
+        @foreach (Location location in locations)
+        {
+            <div>
+                <p style="font-weight:bold">EN COURS DE LOCATION</p>  <p>Client : @location.LocationClientId.NomClient @location.LocationClientId.PrenomClient </p>
+
+                <p>Retour prévu le : @location.DateRetourLocation.Day/@location.DateRetourLocation.Month/@location.DateRetourLocation.Year </p>
+            </div>
+        }
+
+
+    }
+
+
     <div class="groupButton">
-        <div id="saveAction" >
+        <div id="saveAction">
             <a asp-action="Edit" asp-route-id="@Model.Id"><input type="button" class="btn btn-primary" id="saveActionInput" value="Editer" /></a>
         </div>
         <div id="cancelAction">

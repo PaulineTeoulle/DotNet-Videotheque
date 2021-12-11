@@ -74,6 +74,9 @@ namespace ProjetVideotheque.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PrixParJour")
+                        .HasColumnType("int");
+
                     b.Property<string>("RealisateurFilm")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -92,6 +95,9 @@ namespace ProjetVideotheque.Migrations
 
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("DateDebutLocation")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateRetourLocation")
                         .HasColumnType("datetime2");

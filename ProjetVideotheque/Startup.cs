@@ -62,6 +62,8 @@ namespace ProjetVideotheque
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
             });
+
+            DbInitializer.Initialize(app);
         }
     }
 }

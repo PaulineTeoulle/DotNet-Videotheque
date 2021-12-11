@@ -30,6 +30,9 @@ namespace ProjetVideotheque.Models
         [Required(ErrorMessage = "La catégorie du film est requise.")]
         public string CategorieFilm { get; set; }
 
+        [Display(Name = "Prix par jour de location")]
+        public int PrixParJour { get; set; }
+
         public Film()
         {
             // quand le film est créé, il est de suite disponible à la location

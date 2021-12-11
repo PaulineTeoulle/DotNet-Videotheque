@@ -20,6 +20,10 @@
 
 </div>
 
+<form asp-controller="Clients" asp-action="Index" method="get">
+        <input type="submit" value="Voir tous les clients" />
+</form>
+
 
 <table class="table table-striped">
     <thead>
@@ -32,9 +36,9 @@
             </th>
             <th style="width: 25%;">
                 @Html.DisplayNameFor(model => model.MailClient)
-            </th> 
+            </th>
             <th style="width: 20%;">
-              Nombre d'emprunts total
+                Nombre d'emprunts total
             </th>
             <th style="width: 15%;"></th>
         </tr>
@@ -42,25 +46,25 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td style="width: 20%;">
-                @Html.DisplayFor(modelItem => item.NomClient)
-            </td>
-            <td style="width: 20%;">
-                @Html.DisplayFor(modelItem => item.PrenomClient)
-            </td>
-            <td style="width: 25%;">
-                @Html.DisplayFor(modelItem => item.MailClient)
-            </td>
-            <td style="width: 20%;">
-                @Html.DisplayFor(modelItem => item.NbFilmsLoues)
-            </td>
-            <td style="width: 15%;">
-                <a asp-action="Details" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/details.png")" alt="detailsClient" /></a> 
-                <a asp-action="Edit" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/edit.png")" alt="editClient" /></a> 
-                <a asp-action="Delete" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/delete.png")" alt="deleteClient" /></a>
-            </td>
-        </tr>
+            <tr>
+                <td style="width: 20%;">
+                    @Html.DisplayFor(modelItem => item.NomClient)
+                </td>
+                <td style="width: 20%;">
+                    @Html.DisplayFor(modelItem => item.PrenomClient)
+                </td>
+                <td style="width: 25%;">
+                    @Html.DisplayFor(modelItem => item.MailClient)
+                </td>
+                <td style="width: 20%;">
+                    @Html.DisplayFor(modelItem => item.NbFilmsLoues)
+                </td>
+                <td style="width: 15%;">
+                    <a asp-action="Details" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/details.png")" alt="detailsClient" /></a>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/edit.png")" alt="editClient" /></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/delete.png")" alt="deleteClient" /></a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

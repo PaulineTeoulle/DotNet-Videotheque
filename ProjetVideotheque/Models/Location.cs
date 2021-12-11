@@ -23,15 +23,21 @@ namespace ProjetVideotheque.Models
         [Display(Name = "Client")]
         public int ClientId { get; set; }
 
+        [DisplayFormat(HtmlEncode = false, DataFormatString = "{0:d}")]
+        [Display(Name = "Date de début")]
+        public DateTime DateDebutLocation { get; set; }
+
 
         [DisplayFormat(HtmlEncode = false, DataFormatString = "{0:d}")]
         [Display(Name = "Date de retour")]
         public DateTime DateRetourLocation { get; set; }
-        public Boolean RenduFilm { get; set; }
+
+        public bool RenduFilm { get; set; }
 
         public Location()
         {
             this.RenduFilm = false;
+            this.DateDebutLocation = DateTime.Now;
         }
     }
 }

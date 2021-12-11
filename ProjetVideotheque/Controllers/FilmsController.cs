@@ -29,7 +29,9 @@ namespace ProjetVideotheque.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                movies = movies.Where(s => s.NomFilm.Contains(searchString));
+               // movies = movies.Where(s => s.NomFilm.Contains(searchString));  
+                movies = movies.Where(s => s.NomFilm.Contains(searchString) || s.CategorieFilm.Contains(searchString) || s.RealisateurFilm.Contains(searchString));
+
             }
 
             return View(await movies.ToListAsync());
@@ -44,6 +46,7 @@ namespace ProjetVideotheque.Controllers
             }
 
             var film = await _context.Film
+
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (film == null)
             {
@@ -51,9 +54,32 @@ namespace ProjetVideotheque.Controllers
             }
 
             ViewBag.disponibilite = film.DisponibiliteFilm;
-         
+
+            ViewData["Locations"] = GetLocations(id);
+
             return View(film);
         }
+
+
+        private IEnumerable<Location> GetLocations(int? id)
+        {
+
+            if (id == null)
+            {
+                return null;
+            }
+            IEnumerable<Location> locations = _context.Location
+                .Where(m => m.FilmId == id && m.RenduFilm== false)
+               .Include(l => l.LocationClientId)
+               .Include(l => l.LocationFilmId).ToList();
+
+
+            if (!locations.Any()) return null;
+            else return locations.Distinct();
+
+        }
+
+
 
         // GET: Films/Create
         public IActionResult Create()
@@ -66,7 +92,7 @@ namespace ProjetVideotheque.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NomFilm,DateSortieFilm,NbLocationsFilm,RealisateurFilm,DisponibiliteFilm,CategorieFilm")] Film film)
+        public async Task<IActionResult> Create([Bind("Id,NomFilm,DateSortieFilm,NbLocationsFilm,RealisateurFilm,DisponibiliteFilm,CategorieFilm,PrixParJour")] Film film)
         {
             if (ModelState.IsValid)
             {
@@ -98,7 +124,7 @@ namespace ProjetVideotheque.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,NomFilm,DateSortieFilm,NbLocationsFilm,RealisateurFilm,DisponibiliteFilm,CategorieFilm")] Film film)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NomFilm,DateSortieFilm,NbLocationsFilm,RealisateurFilm,DisponibiliteFilm,CategorieFilm,PrixParJour")] Film film)
         {
             if (id != film.Id)
             {

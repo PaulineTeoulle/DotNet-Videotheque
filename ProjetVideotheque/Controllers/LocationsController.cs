@@ -20,10 +20,34 @@ namespace ProjetVideotheque.Controllers
         }
 
         // GET: Locations
-        public async Task<IActionResult> Index()
+       /* public async Task<IActionResult> Index()
         {
             var mvcMovieContext = _context.Location.Include(l => l.LocationClientId).Include(l => l.LocationFilmId);
             return View(await mvcMovieContext.ToListAsync());
+        }*/
+
+
+
+        // GET: Clients
+        public async Task<IActionResult> Index(string searchString)
+        {
+            var locations = from m in _context.Location
+                          select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                locations = locations.Where(s => s.LocationClientId.NomClient.Contains(searchString) ||
+                                            s.LocationClientId.PrenomClient.Contains(searchString) ||
+                                            s.LocationFilmId.NomFilm.Contains(searchString) ||
+                                            s.LocationFilmId.RealisateurFilm.Contains(searchString) ||
+                                            s.LocationFilmId.CategorieFilm.Contains(searchString)
+                );
+
+            }
+
+            locations = locations.Include(l => l.LocationClientId).Include(l => l.LocationFilmId);
+
+            return View(await locations.ToListAsync());
         }
 
         // GET: Locations/Details/5
@@ -69,6 +93,9 @@ namespace ProjetVideotheque.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(location);
+                /*var locationCreated = _context.Location.Find(location.FilmId);
+                locationCreated.DateDebutLocation = DateTime.Now;
+                _context.Update(locationCreated);*/
 
                 var film = _context.Film.Find(location.FilmId);
                 film.NbLocationsFilm++;
@@ -79,6 +106,8 @@ namespace ProjetVideotheque.Controllers
                 client.NbFilmsLoues++;
                 _context.Update(client);
 
+               
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
@@ -88,69 +117,15 @@ namespace ProjetVideotheque.Controllers
 
         }
 
-        // GET: Locations/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var location = await _context.Location.FindAsync(id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-            ViewData["ClientId"] = new SelectList(_context.Client, "Id", "NomClient", location.ClientId);
-            ViewData["FilmId"] = new SelectList(_context.Film, "Id", "NomFilm", location.FilmId);
-            return View(location);
-        }
-
-        // POST: Locations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FilmId,ClientId,DateRetourLocation,RenduFilm")] Location location)
-        {
-            if (id != location.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(location);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!LocationExists(location.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ClientId"] = new SelectList(_context.Client, "Id", "NomClient", location.ClientId);
-            ViewData["FilmId"] = new SelectList(_context.Film, "Id", "NomFilm", location.FilmId);
-            return View(location);
-        }
-
 
         // GET: Locations/Edit/5
         public async Task<IActionResult> ReturnFilm(int? id)
         {
-            if (id == null)
+            /*if (id == null)
             {
                 return NotFound();
             }
+
 
             var location = await _context.Location.FindAsync(id);
             if (location == null)
@@ -158,44 +133,56 @@ namespace ProjetVideotheque.Controllers
                 return NotFound();
             }
             return View(location);
-        }
 
+            if (id == null)
+            {
+                return NotFound();
+            }*/
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ReturnFilmConfirmed(int id, [Bind("Id,FilmId,ClientId,DateRetourLocation,RenduFilm")] Location location)
-        {
-            if (id != location.Id)
+            var location = await _context.Location
+                .Include(l => l.LocationClientId)
+                .Include(l => l.LocationFilmId)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (location == null)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    location.RenduFilm =true;
-                    location.DateRetourLocation = DateTime.Now;
-                    var film = _context.Film.Find(location.FilmId);
-                    film.DisponibiliteFilm = true;
-                    _context.Update(film);
-                    _context.Update(location);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!LocationExists(location.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
             return View(location);
+        }
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ReturnFilmConfirmed(int id)
+        {
+
+
+            var location = await _context.Location.FindAsync(id);
+            location.RenduFilm = true;
+            location.DateRetourLocation = DateTime.Now;
+            _context.Update(location);
+
+            var film = _context.Film.Find(location.FilmId);
+            film.DisponibiliteFilm = true;
+            _context.Update(film);
+
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+
+        }
+
+
+        // POST: Locations/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ReturnConfirmed(int id)
+        {
+            var location = await _context.Location.FindAsync(id);
+            _context.Location.Remove(location);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -235,6 +222,10 @@ namespace ProjetVideotheque.Controllers
             return _context.Location.Any(e => e.Id == id);
         }
 
-       
+
+      
+
+
+
     }
 }

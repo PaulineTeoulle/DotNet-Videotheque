@@ -35,7 +35,8 @@ namespace ProjetVideotheque.Migrations
                     DateSortieFilm = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NbLocationsFilm = table.Column<int>(type: "int", nullable: false),
                     DisponibiliteFilm = table.Column<bool>(type: "bit", nullable: false),
-                    CategorieFilm = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CategorieFilm = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PrixParJour = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,6 +51,7 @@ namespace ProjetVideotheque.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FilmId = table.Column<int>(type: "int", nullable: false),
                     ClientId = table.Column<int>(type: "int", nullable: false),
+                    DateDebutLocation = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DateRetourLocation = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RenduFilm = table.Column<bool>(type: "bit", nullable: false)
                 },

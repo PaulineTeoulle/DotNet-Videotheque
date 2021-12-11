@@ -1,0 +1,57 @@
+﻿@model ProjetVideotheque.Models.Client
+
+@{
+    ViewData["Title"] = "Facture";
+
+    IEnumerable<Location> locations = ViewData["Locations"] as IEnumerable<Location>;
+    double total = 0;
+}
+
+
+<div>
+    <h4>Facture client - @Html.DisplayFor(model => model.NomClient) </h4>
+
+
+    @if (locations != null)
+    {
+
+        <ul>
+            @foreach (Location location in locations)
+            {
+            <li>
+                @if (DateTime.Now > location.DateRetourLocation && location.RenduFilm == false)
+                {
+                    <p style="color:red; font-weight:bold">@location.LocationFilmId.NomFilm </p>
+                    <p style="color:red">
+                        En retard de :
+                        @( DateTime.Now.Date.Subtract(location.DateRetourLocation.Date).TotalDays) jours - Date de rendu initiale : @location.DateRetourLocation.Day/@location.DateRetourLocation.Month/@location.DateRetourLocation.Year
+                    </p>
+                }
+                else
+                {
+                    <p font-weight:bold">@location.LocationFilmId.NomFilm </p>
+                }
+                <div>
+                    @(total +=  (location.LocationFilmId.PrixParJour * ((location.DateRetourLocation.Date - location.DateDebutLocation.Date).TotalDays)))
+                    Prix (prix par jour * nombre de jours) = @location.LocationFilmId.PrixParJour * @((location.DateRetourLocation.Date - location.DateDebutLocation.Date).TotalDays) =  @(location.LocationFilmId.PrixParJour * ((location.DateRetourLocation.Date - location.DateDebutLocation.Date).TotalDays)) €
+                </div>
+            </li>
+            }
+        </ul>
+
+        <p style="font-weight:bold">Total à payer : @total €</p>
+
+      }
+
+
+</div>
+<div>
+    <div class="groupButton">
+        <div id="saveAction">
+            <input type="submit" onclick="document.querySelector('.groupButton').style.display = 'none';javascript: window.print();" value="Imprimer" class="btn btn-primary"  id="saveActionInput" />
+        </div>
+        <div id="cancelAction">
+            <a asp-action="Index"><input type="button" id="cancelActionInput" value="Retour" /></a>
+        </div>
+    </div>
+</div>

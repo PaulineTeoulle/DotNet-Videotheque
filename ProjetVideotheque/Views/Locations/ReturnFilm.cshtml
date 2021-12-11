@@ -4,29 +4,57 @@
     ViewData["Title"] = "ReturnFilmConfirmed";
 }
 
-<h1>Return film</h1>
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ReturnFilmConfirmed">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <input type="hidden" asp-for="FilmId" />
-            <input type="hidden" asp-for="ClientId" />
-            <input type="hidden" asp-for="DateRetourLocation" />
-            <input type="hidden" asp-for="RenduFilm" />
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+<div class="details">
+    <h3>Voulez-vous vraiment retourner cette location et l'archiver ?</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th> @Html.DisplayNameFor(model => model.LocationFilmId)</th>
+                <th> Nom du client</th>
+                <th> Prénom du client</th>
+                <th> @Html.DisplayNameFor(model => model.DateRetourLocation)</th>
+                <th> @Html.DisplayNameFor(model => model.RenduFilm)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.LocationFilmId.NomFilm)</td>
+                <td>
+                    @Model.LocationClientId.NomClient
+                </td>
+                <td>@Html.DisplayFor(model => model.LocationClientId.PrenomClient)</td>
+                <td>@Html.DisplayFor(model => model.DateRetourLocation)</td>
+                <td>@Html.DisplayFor(model => model.RenduFilm)</td>
+            </tr>
+        </tbody>
+
+    </table>
+
+
+
+    <form asp-action="ReturnFilmConfirmed">
+        <input type="hidden" asp-for="Id" />
+        <div class="groupButton">
+            <div id="saveAction">
+                <input type="submit" value="Supprimer" class="btn btn-danger" id="saveActionInput" />
+
             </div>
-        </form>
-    </div>
+
+            <div id="cancelAction">
+                <a asp-action="Index"><input type="button" id="cancelActionInput" value="Annuler" /></a>
+            </div>
+        </div>
+
+    </form>
+
+
+
+
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
