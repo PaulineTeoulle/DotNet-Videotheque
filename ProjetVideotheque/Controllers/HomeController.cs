@@ -17,6 +17,7 @@ namespace ProjetVideotheque.Controllers
             _context = context;
         }
 
+        //Retourne la vue avec la liste des 10 films les plus loués et les locations
         public IActionResult Index()
         {
 
@@ -25,6 +26,7 @@ namespace ProjetVideotheque.Controllers
             return View();
         }
 
+        //Récupère les 10 films les plus loués
         private IEnumerable<Film> GetFilms()
         {
             IEnumerable<Film> films = (from m in _context.Film
@@ -32,7 +34,7 @@ namespace ProjetVideotheque.Controllers
             return !films.Any() ? null : films.OrderByDescending(film => film.NbLocationsFilm).Take(10);
         }
 
-
+        //Récupère toutes les locations
         private IEnumerable<Location> GetLocations()
         {
             var locations = (from m in _context.Location
@@ -40,17 +42,6 @@ namespace ProjetVideotheque.Controllers
 
             if (!locations.Any()) return null;
             else return locations;
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
