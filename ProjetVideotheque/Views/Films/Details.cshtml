@@ -1,7 +1,7 @@
 ﻿@model ProjetVideotheque.Models.Film
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details d'un film";
     IEnumerable<Location> locations = ViewData["Locations"] as IEnumerable<Location>;
 }
 
@@ -55,7 +55,7 @@
 
                     <div>Retour prévu le : @location.DateRetourLocation.Day/@location.DateRetourLocation.Month/@location.DateRetourLocation.Year </div>
                 </div>
-               
+
             </div>
         }
 

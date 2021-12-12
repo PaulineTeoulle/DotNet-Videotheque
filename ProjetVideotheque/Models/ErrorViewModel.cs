@@ -1,5 +1,3 @@
-using System;
-
 namespace ProjetVideotheque.Models
 {
     public class ErrorViewModel

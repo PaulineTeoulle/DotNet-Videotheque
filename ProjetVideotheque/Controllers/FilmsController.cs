@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetVideotheque.Data;
 using ProjetVideotheque.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjetVideotheque.Controllers
 {
@@ -29,7 +27,7 @@ namespace ProjetVideotheque.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-               // movies = movies.Where(s => s.NomFilm.Contains(searchString));  
+                // movies = movies.Where(s => s.NomFilm.Contains(searchString));  
                 movies = movies.Where(s => s.NomFilm.Contains(searchString) || s.CategorieFilm.Contains(searchString) || s.RealisateurFilm.Contains(searchString));
 
             }
@@ -69,7 +67,7 @@ namespace ProjetVideotheque.Controllers
                 return null;
             }
             var locations = _context.Location
-                .Where(m => m.FilmId == id && m.RenduFilm== false)
+                .Where(m => m.FilmId == id && m.RenduFilm == false)
                .Include(l => l.LocationClientId)
                .Include(l => l.LocationFilmId).ToList();
 

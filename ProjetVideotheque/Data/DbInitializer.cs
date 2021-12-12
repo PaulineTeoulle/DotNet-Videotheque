@@ -2,9 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using ProjetVideotheque.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace ProjetVideotheque.Data
 {
@@ -20,8 +18,8 @@ namespace ProjetVideotheque.Data
                 var films = new Film[]
                 {
                     new Film{
-                        NomFilm = "Encanto, la fantastique famille Madrigal", 
-                        RealisateurFilm = "Byron Howard", 
+                        NomFilm = "Encanto, la fantastique famille Madrigal",
+                        RealisateurFilm = "Byron Howard",
                         DateSortieFilm = DateTime.Now,
                         NbLocationsFilm = 0,
                         DisponibiliteFilm = true,
@@ -106,27 +104,27 @@ namespace ProjetVideotheque.Data
 
                 var clients = new Client[]
                  {
-                    new Client { 
+                    new Client {
                         NomClient = "Teoulle",
                         PrenomClient = "Pauline",
                         MailClient  = "pauline.teoulle@etu.univ-grenoble-alpes.fr",
                         AdresseClient = "15 rue du chemin, 38000 GRENOBLE",
                         NbFilmsLoues = 0
                     },
-                    new Client { 
+                    new Client {
                         NomClient = "Tor",
                         PrenomClient = "Nade",
                         MailClient  = "tor.nade@gmail.com",
                         AdresseClient = "18 rue du vent, 38000 GRENOBLE",
                         NbFilmsLoues = 0 },
                     new Client {
-                      
+
                         NomClient = "Arro",
                         PrenomClient = "Soir",
                         MailClient  = "arro.soir@etu.univ-grenoble-alpes.fr",
                         AdresseClient = "8 rue des jardins, 38000 GRENOBLE",
                         NbFilmsLoues = 0 },
-                    new Client { 
+                    new Client {
                         NomClient = "Po",
                         PrenomClient = "Llen",
                         MailClient  = "po.llen@outlook.fr",
@@ -154,44 +152,44 @@ namespace ProjetVideotheque.Data
 
 
 
-               /* var locations = new Location[]
+                /* var locations = new Location[]
+                  {
+                     new Location {
+                         FilmId = films.Single( i => i.NomFilm == "Encanto, la fantastique famille Madrigal").Id,
+                         ClientId = clients.Single( i => i.NomClient == "Teoulle").Id,
+                         DateDebutLocation  = DateTime.Parse("01-02-2008"),
+                         DateRetourLocation = DateTime.Parse("01-02-2008"),
+                         RenduFilm = false
+                     },
+                     new Location {
+                         FilmId =films.Single( i => i.NomFilm == "Vice Versa").Id,
+                         ClientId = clients.Single( i => i.NomClient == "Roy").Id,
+                         DateDebutLocation  = DateTime.Parse("01-02-2008"),
+                         DateRetourLocation = DateTime.Parse("01-02-2008"),
+                         RenduFilm = false },
+
+                     new Location {
+                         FilmId = films.Single( i => i.NomFilm == "Maléfique").Id,
+                         ClientId = clients.Single( i => i.NomClient == "Llen").Id,
+                         DateDebutLocation  = DateTime.Parse("01-02-2008"),
+                         DateRetourLocation = DateTime.Parse("01-02-2008"),
+                         RenduFilm = false 
+                     },
+
+                 };
+
+                 if (!context.Location.Any())
                  {
-                    new Location {
-                        FilmId = films.Single( i => i.NomFilm == "Encanto, la fantastique famille Madrigal").Id,
-                        ClientId = clients.Single( i => i.NomClient == "Teoulle").Id,
-                        DateDebutLocation  = DateTime.Parse("01-02-2008"),
-                        DateRetourLocation = DateTime.Parse("01-02-2008"),
-                        RenduFilm = false
-                    },
-                    new Location {
-                        FilmId =films.Single( i => i.NomFilm == "Vice Versa").Id,
-                        ClientId = clients.Single( i => i.NomClient == "Roy").Id,
-                        DateDebutLocation  = DateTime.Parse("01-02-2008"),
-                        DateRetourLocation = DateTime.Parse("01-02-2008"),
-                        RenduFilm = false },
-
-                    new Location {
-                        FilmId = films.Single( i => i.NomFilm == "Maléfique").Id,
-                        ClientId = clients.Single( i => i.NomClient == "Llen").Id,
-                        DateDebutLocation  = DateTime.Parse("01-02-2008"),
-                        DateRetourLocation = DateTime.Parse("01-02-2008"),
-                        RenduFilm = false 
-                    },
-
-                };
-
-                if (!context.Location.Any())
-                {
-                    foreach (Location location in locations)
-                    {
-                        context.Location.Add(location);
-                    }
-                    context.SaveChanges();
-                }*/
+                     foreach (Location location in locations)
+                     {
+                         context.Location.Add(location);
+                     }
+                     context.SaveChanges();
+                 }*/
             }
 
 
-          
+
         }
     }
 }

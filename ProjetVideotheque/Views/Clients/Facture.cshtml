@@ -1,17 +1,17 @@
 ﻿@model ProjetVideotheque.Models.Client
 
 @{
-    ViewData["Title"] = "Facture";
+    ViewData["Title"] = "Facturer un client";
 
     IEnumerable<Location> locations = ViewData["Locations"] as IEnumerable<Location>;
 }
 
 
 <div>
-    <h4>Facture client  </h4>
+    <h3>Facture client  </h3>
 
     <div>
-        <h3> Information du client </h3>
+        <h4> Information du client </h4>
         <p>
             @Html.DisplayFor(model => model.PrenomClient)  @Html.DisplayFor(model => model.NomClient)
         </p>
@@ -23,7 +23,9 @@
         </p>
     </div>
 
+    <hr />
 
+    <h4> Information des emprunts </h4>
 
     @if (locations != null)
     {
@@ -48,7 +50,7 @@
 
                 @foreach (Location location in locations)
                 {
-                 
+
                     <tr>
                         <td>
 

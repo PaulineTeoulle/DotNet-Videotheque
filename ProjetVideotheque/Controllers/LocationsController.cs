@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProjetVideotheque.Data;
 using ProjetVideotheque.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjetVideotheque.Controllers
 {
@@ -23,7 +22,7 @@ namespace ProjetVideotheque.Controllers
         public async Task<IActionResult> Index(string searchString)
         {
             var locations = from m in _context.Location
-                          select m;
+                            select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -65,8 +64,8 @@ namespace ProjetVideotheque.Controllers
         public IActionResult Create()
         {
             var films = from b in _context.Film
-                                     where b.DisponibiliteFilm == true
-                                     select b;
+                        where b.DisponibiliteFilm == true
+                        select b;
 
             ViewData["ClientId"] = new SelectList(_context.Client, "Id", "NomClient");
             ViewData["FilmId"] = new SelectList(films, "Id", "NomFilm");
@@ -96,7 +95,7 @@ namespace ProjetVideotheque.Controllers
                 client.NbFilmsLoues++;
                 _context.Update(client);
 
-               
+
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -111,7 +110,7 @@ namespace ProjetVideotheque.Controllers
         // GET: Locations/Edit/5
         public async Task<IActionResult> ReturnFilm(int? id)
         {
-                  if (id == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -176,7 +175,7 @@ namespace ProjetVideotheque.Controllers
                 .Include(l => l.LocationFilmId)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-           
+
 
             if (location == null)
             {
@@ -221,7 +220,7 @@ namespace ProjetVideotheque.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id,  Location location)
+        public async Task<IActionResult> Edit(int id, Location location)
         {
             if (id != location.Id)
             {

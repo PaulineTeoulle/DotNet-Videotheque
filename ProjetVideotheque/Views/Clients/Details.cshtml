@@ -1,7 +1,7 @@
 ﻿@model ProjetVideotheque.Models.Client
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Details d'un client";
 
     IEnumerable<Location> locations = ViewData["Locations"] as IEnumerable<Location>;
 }
@@ -69,7 +69,7 @@
         <input type="hidden" asp-for="Id" />
         <div class="groupButton">
             <div id="saveAction">
-                <input type="submit" value="Imprimer facture" class="btn btn-danger" id="saveActionInput" />
+                <input type="submit" value="Imprimer facture" class="btn btn-primary" id="saveActionInput" />
 
             </div>
         </div>

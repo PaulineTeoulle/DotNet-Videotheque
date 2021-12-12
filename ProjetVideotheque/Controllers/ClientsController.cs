@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProjetVideotheque.Data;
 using ProjetVideotheque.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ProjetVideotheque.Controllers
 {
@@ -19,19 +18,19 @@ namespace ProjetVideotheque.Controllers
             _context = context;
         }
 
-      
+
 
         // GET: Clients
         public async Task<IActionResult> Index(string searchString)
         {
 
             var clients = from m in _context.Client
-                         select m;
+                          select m;
 
             if (!String.IsNullOrEmpty(searchString))
             {
                 // movies = movies.Where(s => s.NomFilm.Contains(searchString));  
-                clients = clients.Where(s => s.NomClient.Contains(searchString) || 
+                clients = clients.Where(s => s.NomClient.Contains(searchString) ||
                                                 s.PrenomClient.Contains(searchString) ||
                                                 s.AdresseClient.Contains(searchString) ||
                                                 s.MailClient.Contains(searchString));
@@ -221,7 +220,7 @@ namespace ProjetVideotheque.Controllers
         private IEnumerable<Location> GetLocationsForOneClient(int? id)
         {
 
-            if(id== null)
+            if (id == null)
             {
                 return null;
             }
@@ -235,7 +234,7 @@ namespace ProjetVideotheque.Controllers
             else return locations.Distinct();
         }
 
-       
+
 
     }
 }

@@ -1,10 +1,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using ProjetVideotheque.Data;
-using ProjetVideotheque.Models;
-using System;
 
 namespace ProjetVideotheque
 {
@@ -18,7 +14,7 @@ namespace ProjetVideotheque
             {
                 var services = scope.ServiceProvider;
 
-             
+
             }
 
             host.Run();

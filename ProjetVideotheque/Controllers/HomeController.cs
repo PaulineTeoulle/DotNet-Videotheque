@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjetVideotheque.Data;
 using ProjetVideotheque.Models;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -37,7 +36,7 @@ namespace ProjetVideotheque.Controllers
         private IEnumerable<Location> GetLocations()
         {
             var locations = (from m in _context.Location
-                                               select m).ToList();
+                             select m).ToList();
 
             if (!locations.Any()) return null;
             else return locations;

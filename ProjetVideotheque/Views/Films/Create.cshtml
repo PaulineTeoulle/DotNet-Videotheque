@@ -1,12 +1,12 @@
 ﻿@model ProjetVideotheque.Models.Film
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Créer un film";
 }
 
 <div class="addFilm">
     <form asp-action="Create">
-        <div class="form-group" id=" #title">
+        <div class="form-group" id="title">
             <label asp-for="NomFilm" class="control-label"></label>
             <input asp-for="NomFilm" class="form-control" />
             <span asp-validation-for="NomFilm" class="text-danger"></span>
