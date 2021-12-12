@@ -19,6 +19,7 @@ namespace ProjetVideotheque.Controllers
         }
 
         // GET: Locations
+        // Recherche la searchString dans la table Location et renvoie la liste à la Vue
         public async Task<IActionResult> Index(string searchString)
         {
             var locations = from m in _context.Location
@@ -41,6 +42,7 @@ namespace ProjetVideotheque.Controllers
         }
 
         // GET: Locations/Details/5
+        // Retourne les informations d'une location grâce à l'id passé en URL 
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -48,10 +50,7 @@ namespace ProjetVideotheque.Controllers
                 return NotFound();
             }
 
-            var location = await _context.Location
-                .Include(l => l.LocationClientId)
-                .Include(l => l.LocationFilmId)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            Location location = await GetLocationInfosFromId(id);
             if (location == null)
             {
                 return NotFound();
@@ -61,6 +60,7 @@ namespace ProjetVideotheque.Controllers
         }
 
         // GET: Locations/Create
+        // Renvoie la vue de création de location avec les films disponibles et les clients
         public IActionResult Create()
         {
             var films = from b in _context.Film
@@ -73,8 +73,7 @@ namespace ProjetVideotheque.Controllers
         }
 
         // POST: Locations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Création d'une nouvelle location dans le contexte via les paramètres bindés
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,FilmId,ClientId,DateRetourLocation,RenduFilm")] Location location)
@@ -82,43 +81,33 @@ namespace ProjetVideotheque.Controllers
             if (ModelState.IsValid)
             {
                 _context.Add(location);
-                /*var locationCreated = _context.Location.Find(location.FilmId);
-                locationCreated.DateDebutLocation = DateTime.Now;
-                _context.Update(locationCreated);*/
-
+                //Récupération du film emprunté
                 var film = _context.Film.Find(location.FilmId);
                 film.NbLocationsFilm++;
                 film.DisponibiliteFilm = false;
                 _context.Update(film);
 
+                //Récupération du client qui fait la location
                 var client = _context.Client.Find(location.ClientId);
                 client.NbFilmsLoues++;
                 _context.Update(client);
 
-
-
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientId"] = new SelectList(_context.Client, "Id", "NomClient", location.ClientId);
-            ViewData["FilmId"] = new SelectList(_context.Film, "Id", "NomFilm", location.FilmId);
             return View(location);
 
         }
 
-
-        // GET: Locations/Edit/5
+        // GET: Locations/ReturnFilm/5
+        // Retourne les informations de la location grâce à l'id passé en URL
         public async Task<IActionResult> ReturnFilm(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-
-            var location = await _context.Location
-                .Include(l => l.LocationClientId)
-                .Include(l => l.LocationFilmId)
-                .FirstOrDefaultAsync(m => m.Id == id);
+            Location location = await GetLocationInfosFromId(id);
             if (location == null)
             {
                 return NotFound();
@@ -127,55 +116,41 @@ namespace ProjetVideotheque.Controllers
             return View(location);
         }
 
-
-
+        // POST: Locations/ReturnFilm/5
+        // Update la date de retour de location et les booléens de disponibilité
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ReturnFilmConfirmed(int id)
         {
-
-
-            var location = await _context.Location.FindAsync(id);
+            Location location = await GetLocationFromId(id);
             location.RenduFilm = true;
             location.DateRetourLocation = DateTime.Now;
             _context.Update(location);
 
+            //Récupération du film
             var film = _context.Film.Find(location.FilmId);
             film.DisponibiliteFilm = true;
             _context.Update(film);
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-
         }
 
-
-        // POST: Locations/Delete/5
-        [HttpPost, ActionName("ReturnConfirmed")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ReturnConfirmed(int id)
+        private async Task<Location> GetLocationFromId(int id)
         {
-            var location = await _context.Location.FindAsync(id);
-            _context.Location.Remove(location);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //Récupération de la location
+            return await _context.Location.FindAsync(id);
         }
-
-
 
         // GET: Locations/Delete/5
+        // Retourne les informations de la location à supprimer grâce à l'id passé en URL 
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
-            var location = await _context.Location
-                .Include(l => l.LocationClientId)
-                .Include(l => l.LocationFilmId)
-                .FirstOrDefaultAsync(m => m.Id == id);
-
-
+            Location location = await GetLocationInfosFromId(id);
 
             if (location == null)
             {
@@ -186,11 +161,13 @@ namespace ProjetVideotheque.Controllers
         }
 
         // POST: Locations/Delete/5
+        // Suppression de la location dans le context récupéré via l'id
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var location = await _context.Location.FindAsync(id);
+            //Récupération de la location par l'id
+            Location location = await GetLocationFromId(id);
             _context.Location.Remove(location);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -204,20 +181,16 @@ namespace ProjetVideotheque.Controllers
 
 
         // GET: Locations/Edit/5
+        // Retourne les informations de la location à éditer grâce à l'id passé en URL 
         public async Task<IActionResult> Edit(int? id)
         {
-
-            var location = await _context.Location
-               .Include(l => l.LocationClientId)
-               .Include(l => l.LocationFilmId)
-               .FirstOrDefaultAsync(m => m.Id == id);
+            Location location = await GetLocationInfosFromId(id);
 
             return View(location);
         }
 
         // POST: Locations/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Modification de la location dans le contexte 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Location location)
@@ -249,6 +222,16 @@ namespace ProjetVideotheque.Controllers
             }
             return View(location);
 
+        }
+
+
+        //Récupère les informations d'une location à partir de l'id
+        private async Task<Location> GetLocationInfosFromId(int? id)
+        {
+            return await _context.Location
+                .Include(l => l.LocationClientId)
+                .Include(l => l.LocationFilmId)
+                .FirstOrDefaultAsync(m => m.Id == id);
         }
 
 
