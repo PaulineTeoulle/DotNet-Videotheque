@@ -59,7 +59,7 @@ namespace ProjetVideotheque.Controllers
       
 
         // GET: Clients/Create
-        //Renvoie la vue de création de client
+        // Renvoie la vue de création de client
         public IActionResult Create()
         {
             return View();
@@ -156,12 +156,14 @@ namespace ProjetVideotheque.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            //Récupération du client par l'id
             Client client = await GetClientFromId(id);
             _context.Client.Remove(client);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
+        //Check si le client existe
         private bool ClientExists(int id)
         {
             return _context.Client.Any(e => e.Id == id);
