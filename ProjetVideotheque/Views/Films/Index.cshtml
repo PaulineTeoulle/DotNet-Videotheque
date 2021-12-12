@@ -4,23 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
-<div class="row" id="topBar">
-    <form asp-controller="Films" asp-action="Index" method="get">
-        <p>
-            <input type="text" name="SearchString" placeholder="Rechercher un film" />
-            <input type="submit" value="Filter" />
-        </p>
-    </form>
 
-    <p class=" offset-md-8">
-        <button class="btn btn-primary " onclick="location.href='@Url.Action("Create", "Films")'">+ Ajouter un film</button>
-    </p>
+
+<div class="groupButton justify-content-between">
+    <div class="btn col">
+        <form asp-controller="Films" asp-action="Index" method="get">
+            <input type="text" name="SearchString" placeholder="Rechercher un film" class="searchInput" />
+        </form>
+    </div>
+
+    <div class="btn col-6">
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Action("Index", "Films")'">Voir tous les films</button>
+    </div>
+    <div class="btn col"> <button class="btn btn-primary " onclick="location.href='@Url.Action("Create", "Films")'">+ Ajouter un film</button></div>
 </div>
-
-
-<form asp-controller="Films" asp-action="Index" method="get">
-    <input type="submit" value="Voir tous les films" />
-</form>
 
 
 <div class="row">

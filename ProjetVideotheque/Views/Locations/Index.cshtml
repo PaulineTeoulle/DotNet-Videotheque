@@ -5,23 +5,19 @@
 }
 
 
-<div class="row" id="topBar">
-        <form asp-controller="Locations" asp-action="Index" method="get" >
-            <p>
-                <input type="text" name="SearchString" placeholder="Rechercher un emprunt" />
-                <input type="submit" value="Filter" />
-            </p>
-        </form>
-    <p class="offset-md-8">
-        <button class="btn btn-primary " onclick="location.href='@Url.Action("Create", "Locations")'">+ Ajouter un emprunt</button>
-    </p>
-</div>
 
-<form asp-controller="Locations" asp-action="Index" method="get" id="search">
-    <p>
-        <input type="submit" value="Voir tous les emprunts" />
-    </p>
-</form>
+<div class="groupButton justify-content-between">
+    <div class="btn col">
+        <form asp-controller="Locations" asp-action="Index" method="get">
+            <input type="text" name="SearchString" placeholder="Rechercher un emprunt" class="searchInput" />
+        </form>
+    </div>
+
+    <div class="btn col-6">
+        <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Action("Index", "Locations")'">Voir tous les emprunts</button>
+    </div>
+    <div class="btn col"> <button class="btn btn-primary " onclick="location.href='@Url.Action("Create", "Locations")'">+ Ajouter un emprunt</button></div>
+</div>
 
 <h1> Locations en cours</h1>
 <div class="row">
@@ -29,7 +25,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.LocationClientId)
+                    Client
                 </th>
                 <th>
                     Email du client
@@ -53,49 +49,57 @@
 
             @foreach (var item in Model)
             {
-            <tr>
+                <tr>
 
-                @if (!(bool)item.RenduFilm)
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationClientId.NomClient)
-                        @Html.DisplayFor(modelItem => item.LocationClientId.PrenomClient)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationClientId.MailClient)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationFilmId.NomFilm)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationFilmId.RealisateurFilm)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateDebutLocation)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateRetourLocation)
-                    </td>
-                    <td>
+                    @if (!(bool)item.RenduFilm)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationClientId.NomClient)
+                            @Html.DisplayFor(modelItem => item.LocationClientId.PrenomClient)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationClientId.MailClient)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationFilmId.NomFilm)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationFilmId.RealisateurFilm)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateDebutLocation)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateRetourLocation)
+                        </td>
 
-                        <a asp-action="Edit" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/edit.png")" alt="editLocation" /></a>
-                        <a asp-action="ReturnFilm" asp-route-id="@item.Id">Rendre le film</a>
-                    </td>
-                }
 
-            </tr>
+                        <td>
+                            <a asp-action="ReturnFilm" asp-route-id="@item.Id">Rendre le film</a>
+                        </td>
+                        <td>
+
+                            <a asp-action="Edit" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/edit.png")" alt="editLocation" /></a>
+
+                        </td>
+
+                    }
+
+                </tr>
             }
         </tbody>
     </table>
+</div>
+<hr />
+<h1> Locations archivées</h1>
+<div class="row">
 
-    <hr/>
-    <h1> Locations archivées</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.LocationClientId)
+                    Client
                 </th>
                 <th>
                     Email du client
@@ -119,38 +123,38 @@
 
             @foreach (var item in Model)
             {
-            <tr>
+                <tr>
 
-                @if ((bool)item.RenduFilm)
-                {
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationClientId.NomClient)
-                        @Html.DisplayFor(modelItem => item.LocationClientId.PrenomClient)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationClientId.MailClient)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationFilmId.NomFilm)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LocationFilmId.RealisateurFilm)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateDebutLocation)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateRetourLocation)
-                    </td>
-                    <td>
-                        Rendu
-                    </td>
+                    @if ((bool)item.RenduFilm)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationClientId.NomClient)
+                            @Html.DisplayFor(modelItem => item.LocationClientId.PrenomClient)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationClientId.MailClient)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationFilmId.NomFilm)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LocationFilmId.RealisateurFilm)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateDebutLocation)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateRetourLocation)
+                        </td>
+                        <td>
+                            Rendu
+                        </td>
 
-                    <td>
-                        <a asp-action="Delete" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/delete.png")" alt="deleteLocation" /></a>
-                    </td>
-                }
-            </tr>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/delete.png")" alt="deleteLocation" /></a>
+                        </td>
+                    }
+                </tr>
             }
         </tbody>
     </table>

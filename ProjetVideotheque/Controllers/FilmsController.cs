@@ -68,7 +68,7 @@ namespace ProjetVideotheque.Controllers
             {
                 return null;
             }
-            IEnumerable<Location> locations = _context.Location
+            var locations = _context.Location
                 .Where(m => m.FilmId == id && m.RenduFilm== false)
                .Include(l => l.LocationClientId)
                .Include(l => l.LocationFilmId).ToList();

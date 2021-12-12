@@ -36,11 +36,11 @@ p{
     border-bottom: 2px solid rgb(184,184,184);
 }
 
-input[type=button] {
+.returnFilm {
     border: 1px solid rgb(45,152,218);
     border-radius: 5px;
-    padding-left:25px;
-    padding-right:25px;
+    padding-left: 25px;
+    padding-right: 25px;
 }
 
 .smallIcon {
@@ -50,16 +50,22 @@ input[type=button] {
 }
 .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
     background-color: rgb(45,152,218);
-    border: none;
     padding: 10px 40px 10px 40px;
     border: 2px solid rgb(184,184,184);
 }
 
 .btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
     background-color: #e55039;
-    border: none;
     padding: 10px 40px 10px 40px;
     border: 2px solid rgb(184,184,184);
+}
+
+
+.btn-outline-secondary, .btn-outline-secondary:hover, .btn-outline-secondary:active, .btn-outline-secondary:visited {
+    background-color: white;
+    padding: 10px 40px 10px 40px;
+    border: 2px solid rgb(184,184,184);
+    color: rgb(184,184,184);
 }
 
 .customisedBackground {
@@ -89,10 +95,18 @@ tbody {
         font-weight: normal;
         font-size: 0.8em;
         border: hidden;
+
 }
 
 th {
     font-weight: normal;
+  
+}
+td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
 
 .itemDispo{
@@ -104,11 +118,11 @@ th {
 
 .addClient, .addFilm, .addLocation, .editClient, .editFilm, .details {
     margin: auto;
-    width: 50%;
+    width: 80%;
     margin-top: 100px;
 }
 
-#lastName, #firstName, #search, #button {
+#lastName, #firstName, #search, #button, #title, #year {
   display: inline-block;
     width:49%;
 }
@@ -118,7 +132,7 @@ th {
     display:flex;
 }
 
-#saveAction, #cancelAction, #titre,#year {
+#saveAction, #cancelAction {
     width:50%;
 }
 
@@ -136,3 +150,23 @@ th {
 }
 
 
+.searchInput {
+    border: none;
+    border-bottom: 2px solid rgb(184,184,184);
+    padding: 10px 40px 10px 40px;
+}
+
+.seeAllButton {
+    border-radius: 5px;
+    border: 2px solid rgb(184,184,184);
+    background-color: white;
+    width: 100%;
+    padding: 10px 40px 10px 40px;
+    color: red;
+}
+
+.additionalInfos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -10,7 +10,7 @@ using ProjetVideotheque.Data;
 namespace ProjetVideotheque.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20211211114921_InitialCreate")]
+    [Migration("20211212114541_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

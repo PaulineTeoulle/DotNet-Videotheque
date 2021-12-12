@@ -20,15 +20,6 @@ namespace ProjetVideotheque.Controllers
         }
 
         // GET: Locations
-       /* public async Task<IActionResult> Index()
-        {
-            var mvcMovieContext = _context.Location.Include(l => l.LocationClientId).Include(l => l.LocationFilmId);
-            return View(await mvcMovieContext.ToListAsync());
-        }*/
-
-
-
-        // GET: Clients
         public async Task<IActionResult> Index(string searchString)
         {
             var locations = from m in _context.Location
@@ -73,10 +64,9 @@ namespace ProjetVideotheque.Controllers
         // GET: Locations/Create
         public IActionResult Create()
         {
-
             var films = from b in _context.Film
-                        where b.DisponibiliteFilm == true
-                        select b;
+                                     where b.DisponibiliteFilm == true
+                                     select b;
 
             ViewData["ClientId"] = new SelectList(_context.Client, "Id", "NomClient");
             ViewData["FilmId"] = new SelectList(films, "Id", "NomFilm");
@@ -121,23 +111,10 @@ namespace ProjetVideotheque.Controllers
         // GET: Locations/Edit/5
         public async Task<IActionResult> ReturnFilm(int? id)
         {
-            /*if (id == null)
+                  if (id == null)
             {
                 return NotFound();
             }
-
-
-            var location = await _context.Location.FindAsync(id);
-            if (location == null)
-            {
-                return NotFound();
-            }
-            return View(location);
-
-            if (id == null)
-            {
-                return NotFound();
-            }*/
 
             var location = await _context.Location
                 .Include(l => l.LocationClientId)
@@ -175,7 +152,7 @@ namespace ProjetVideotheque.Controllers
 
 
         // POST: Locations/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("ReturnConfirmed")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ReturnConfirmed(int id)
         {
@@ -198,6 +175,9 @@ namespace ProjetVideotheque.Controllers
                 .Include(l => l.LocationClientId)
                 .Include(l => l.LocationFilmId)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+           
+
             if (location == null)
             {
                 return NotFound();
@@ -223,8 +203,54 @@ namespace ProjetVideotheque.Controllers
         }
 
 
-      
 
+        // GET: Locations/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+
+            var location = await _context.Location
+               .Include(l => l.LocationClientId)
+               .Include(l => l.LocationFilmId)
+               .FirstOrDefaultAsync(m => m.Id == id);
+
+            return View(location);
+        }
+
+        // POST: Locations/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id,  Location location)
+        {
+            if (id != location.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(location);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!LocationExists(location.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(location);
+
+        }
 
 
     }

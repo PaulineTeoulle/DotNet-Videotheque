@@ -20,7 +20,7 @@ namespace ProjetVideotheque.Controllers
 
         public IActionResult Index()
         {
-            
+
             ViewData["Films"] = GetFilms();
             ViewData["Locations"] = GetLocations();
             return View();
@@ -36,8 +36,8 @@ namespace ProjetVideotheque.Controllers
 
         private IEnumerable<Location> GetLocations()
         {
-            IEnumerable<Location> locations = (from m in _context.Location
-                                            select m).ToList();
+            var locations = (from m in _context.Location
+                                               select m).ToList();
 
             if (!locations.Any()) return null;
             else return locations;

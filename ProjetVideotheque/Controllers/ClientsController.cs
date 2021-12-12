@@ -62,7 +62,7 @@ namespace ProjetVideotheque.Controllers
 
 
 
-            IEnumerable<Location> locations = GetLocationsForOneClient(id).Distinct();
+            var locations = GetLocationsForOneClient(id);
             ViewData["Locations"] = locations;
 
 
@@ -193,10 +193,30 @@ namespace ProjetVideotheque.Controllers
                 return NotFound();
             }
 
-            IEnumerable<Location> locations = GetLocationsForOneClient(id);
+            var locations = GetLocationsForOneClient(id);
             ViewData["Locations"] = locations;
+
+
+            ViewBag.totalPrice = GetTotalPrice(locations);
             return View(client);
         }
+
+        private static double GetTotalPrice(IEnumerable<Location> locations)
+        {
+
+            if (locations != null)
+            {
+                double totalPrice = 0;
+                foreach (Location location in locations)
+                {
+
+                    totalPrice += location.LocationFilmId.PrixParJour * ((location.DateRetourLocation.Date - location.DateDebutLocation.Date).TotalDays);
+                }
+                return totalPrice;
+            }
+            return 0;
+        }
+
 
         private IEnumerable<Location> GetLocationsForOneClient(int? id)
         {
@@ -205,7 +225,7 @@ namespace ProjetVideotheque.Controllers
             {
                 return null;
             }
-            IEnumerable<Location> locations = _context.Location
+            var locations = _context.Location
                 .Where(m => m.ClientId == id && m.RenduFilm == false)
                .Include(l => l.LocationClientId)
                .Include(l => l.LocationFilmId).ToList();

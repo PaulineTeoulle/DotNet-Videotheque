@@ -4,48 +4,41 @@
     ViewData["Title"] = "Index";
 }
 
+    <div class="groupButton justify-content-between">
+        <div class="btn col" >
+            <form asp-controller="Clients" asp-action="Index" method="get">
+                <input type="text" name="SearchString" placeholder="Rechercher un client" class="searchInput" />
+            </form>
+        </div>
 
-<div class="row ">
-
-    <form asp-controller="Clients" asp-action="Index" method="get">
-        <p>
-            <input type="text" name="SearchString" placeholder="Rechercher un client" />
-            <input type="submit" value="Filter" />
-        </p>
-    </form>
-
-    <p class=" offset-md-8">
-        <button class="btn btn-primary " onclick="location.href='@Url.Action("Create", "Clients")'">+ Ajouter un client</button>
-    </p>
-
-</div>
-
-<form asp-controller="Clients" asp-action="Index" method="get">
-        <input type="submit" value="Voir tous les clients" />
-</form>
+        <div class="btn col-6">
+           <button type="button" class="btn btn-outline-secondary" onclick="location.href='@Url.Action("Index", "Clients")'">Voir tous les clients</button>
+        </div>
+        <div class="btn col"> <button class="btn btn-primary " onclick="location.href='@Url.Action("Create", "Clients")'">+ Ajouter un client</button></div>
+    </div>
 
 
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th style="width: 20%;">
-                @Html.DisplayNameFor(model => model.NomClient)
-            </th>
-            <th style="width: 20%;">
-                @Html.DisplayNameFor(model => model.PrenomClient)
-            </th>
-            <th style="width: 25%;">
-                @Html.DisplayNameFor(model => model.MailClient)
-            </th>
-            <th style="width: 20%;">
-                Nombre d'emprunts total
-            </th>
-            <th style="width: 15%;"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table class="table table-striped " style="table-layout:fixed">
+        <thead>
+            <tr>
+                <th style="width: 20%;">
+                    @Html.DisplayNameFor(model => model.NomClient)
+                </th>
+                <th style="width: 20%;">
+                    @Html.DisplayNameFor(model => model.PrenomClient)
+                </th>
+                <th style="width: 25%;">
+                    @Html.DisplayNameFor(model => model.MailClient)
+                </th>
+                <th style="width: 20%;">
+                    Nombre d'emprunts total
+                </th>
+                <th style="width: 15%;"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
             <tr>
                 <td style="width: 20%;">
                     @Html.DisplayFor(modelItem => item.NomClient)
@@ -56,15 +49,18 @@
                 <td style="width: 25%;">
                     @Html.DisplayFor(modelItem => item.MailClient)
                 </td>
-                <td style="width: 20%;">
+
+                <td class="text-center">
                     @Html.DisplayFor(modelItem => item.NbFilmsLoues)
+
                 </td>
+               
                 <td style="width: 15%;">
                     <a asp-action="Details" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/details.png")" alt="detailsClient" /></a>
                     <a asp-action="Edit" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/edit.png")" alt="editClient" /></a>
                     <a asp-action="Delete" asp-route-id="@item.Id"><img class="smallIcon" src="@Url.Content("~/delete.png")" alt="deleteClient" /></a>
                 </td>
             </tr>
-        }
-    </tbody>
-</table>
+            }
+        </tbody>
+    </table>

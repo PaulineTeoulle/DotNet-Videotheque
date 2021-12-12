@@ -34,39 +34,49 @@
     @if (locations != null)
     {
 
-        <div>
-            Location en cours :
-            <ul>
+        <div class="additionalInfos">
+            <div>
 
-                @foreach (Location location in locations)
-                {
+                <div style="font-weight:bold">LOCATIONS EN COURS :</div>
+                <ul>
+
+                    @foreach (Location location in locations)
+                    {
                     <li>
-                        @location.LocationFilmId.NomFilm
+                        @location.LocationFilmId.NomFilm | Retour prévu le :   @location.DateRetourLocation.Day/@location.DateRetourLocation.Month/@location.DateRetourLocation.Year
                     </li>
-                }
-            </ul>
-        </div>
-            }
-
-
-            <div class="groupButton">
-                <div id="saveAction">
-                    <a asp-action="Edit" asp-route-id="@Model.Id"><input type="button" class="btn btn-primary" id="saveActionInput" value="Editer" /></a>
-                </div>
-                <div id="cancelAction">
-                    <a asp-action="Index"><input type="button" id="cancelActionInput" value="Annuler" /></a>
-                </div>
+                    }
+                </ul>
             </div>
-
-
-            <form asp-action="Facture">
-                <input type="hidden" asp-for="Id" />
-                <div class="groupButton">
-                    <div id="saveAction">
-                        <input type="submit" value="Imprimer facture" class="btn btn-danger" id="saveActionInput" />
-
-                    </div>
-                </div>
-
-            </form>
         </div>
+    }
+
+
+
+
+
+    <div class="groupButton">
+        <div id="saveAction">
+            <a asp-action="Edit" asp-route-id="@Model.Id"><input type="button" class="btn btn-primary" id="saveActionInput" value="Editer" /></a>
+        </div>
+        <div id="cancelAction">
+            <a asp-action="Index"><input type="button" id="cancelActionInput" value="Annuler" /></a>
+        </div>
+    </div>
+
+
+    <form asp-action="Facture">
+        <input type="hidden" asp-for="Id" />
+        <div class="groupButton">
+            <div id="saveAction">
+                <input type="submit" value="Imprimer facture" class="btn btn-danger" id="saveActionInput" />
+
+            </div>
+        </div>
+
+    </form>
+
+</div>
+
+
+

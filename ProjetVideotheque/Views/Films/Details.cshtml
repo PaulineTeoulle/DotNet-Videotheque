@@ -49,10 +49,13 @@
 
         @foreach (Location location in locations)
         {
-            <div>
-                <p style="font-weight:bold">EN COURS DE LOCATION</p>  <p>Client : @location.LocationClientId.NomClient @location.LocationClientId.PrenomClient </p>
+            <div class="additionalInfos">
+                <div>
+                    <div style="font-weight:bold">EN COURS DE LOCATION</div>  <div>Client : @location.LocationClientId.NomClient @location.LocationClientId.PrenomClient </div>
 
-                <p>Retour prévu le : @location.DateRetourLocation.Day/@location.DateRetourLocation.Month/@location.DateRetourLocation.Year </p>
+                    <div>Retour prévu le : @location.DateRetourLocation.Day/@location.DateRetourLocation.Month/@location.DateRetourLocation.Year </div>
+                </div>
+               
             </div>
         }
 
